@@ -9,10 +9,23 @@ public class ShowTipButton : MonoBehaviour
     public RectTransform tipCooldownBar;
     public float tipCooldown;
 
+    private float cooldownLeft;
+
     private void Start()
     {
         available = true;
         tipCooldownBar.localScale = new Vector3(1f, 0f, 1f);
+    }
+
+    private void OnEnable()
+    {
+        if(!available)
+            StartCoroutine(Cooldown(cooldownLeft));
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     public void ToggleTip()
@@ -23,19 +36,23 @@ public class ShowTipButton : MonoBehaviour
             ShowTip();
     }
 
-    private IEnumerator Cooldown()
+    private IEnumerator Cooldown(float time)
     {
         float timer = 0f;
         available = false;
+
+        cooldownLeft = time;
         while (true)
         {
             //Debug.Log("ShowTipButton - Cooldown"); -- Optimized!
             timer += Time.deltaTime;
+            cooldownLeft -= Time.deltaTime;
 
-            tipCooldownBar.localScale = new Vector3(1f, Mathf.Lerp(1f, 0f, timer / tipCooldown), 1f);
+            tipCooldownBar.localScale = new Vector3(1f, Mathf.Lerp(1f, 0f, timer / time), 1f);
 
-            if(timer > tipCooldown)
+            if(timer > time)
             {
+                cooldownLeft = 0f;
                 available = true;
                 yield break;
             }
@@ -133,7 +150,7 @@ public class ShowTipButton : MonoBehaviour
     private void StopShowingTip()
     {
         StopCoroutine(DisableAfterTimeRoutine);
-        StartCoroutine(Cooldown());
+        StartCoroutine(Cooldown(tipCooldown));
 
         Countdown.Instance.ResumeCountdown();
         TipPanel.Instance.Close();
