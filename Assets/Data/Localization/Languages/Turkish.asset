@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a68db8868a8dd4a909a79d8d6fe0aa, type: 3}
+  m_Name: Turkish
+  m_EditorClassIdentifier: 
+  languagePrefix: tr
+  languageIcon: {fileID: 21300000, guid: c03d036f7be79e742bee6ea9939bb249, type: 3}
+  yes: EVET
+  no: HAYIR
+  _continue: DEVAM ET
+  close: KAPAT
+  end: "B\u0130T\u0130R"
+  back: "GER\u0130"
+  main_menu_header: "MATEMAT\u0130K ADASI"
+  main_menu_resume_game: DEVAM ET
+  main_menu_start_game: "OYUNA BA\u015ELA"
+  main_menu_settings: AYARLAR
+  main_menu_credits: HAZIRLAYANLAR
+  main_menu_reset: SIFIRLA
+  main_menu_exit: "\xC7IK"
+  main_menu_are_you_sure_to_reset: "Devam edersen t\xFCm kay\u0131tlar\u0131n silinecek.
+    Devam etmek istedi\u011Fine emin misin?"
+  settings_menu_master_volume: "GENEL SES SEV\u0130YES\u0130"
+  settings_menu_music_volume: "M\xDCZ\u0130K SES SEV\u0130YES\u0130"
+  settings_graphics_quality: "GRAF\u0130K KAL\u0130TES\u0130"
+  settings_quality_level_1: "D\xDC\u015E\xDCK"
+  settings_quality_level_2: ORTA
+  settings_quality_level_3: "Y\xDCKSEK"
+  settings_quality_level_4: ULTRA
+  in_game_menu_gold: KASA
+  in_game_menu_go_fishing: BALIK TUT
+  in_game_menu_closest_market: EN YAKIN MARKET
+  in_game_menu_inventory: ENVANTER
+  in_game_menu_stop: DUR!
+  timeout_text: "NE YAZIK K\u0130 S\xDCREN B\u0130TT\u0130 :("
+  credits_designer: "D\u0130ZAYN"
+  credits_graphics: "GRAF\u0130KLER"
+  credits_programming: PROGRAMLAMA
+  credits_ui: "MEN\xDCLER/UI"
+  credits_testing: TESTING
+  fishing_rod_broken: OLTAN KIRILDI!
+  fishing_correct_answer: "TEBRIKLER <br> DO\u011ERU CEVAP!"
+  fishing_wrong_answer: "MAALESEF <br> YANLI\u015E CEVAP!"
+  fishing_caught_fish: '{0} ADET {1} YAKALADIN!'
+  fishing_you_need_rod: "BALIK TUTMAK \u0130\xC7\u0130N OLTAYA \u0130HT\u0130YACIN
+    VAR!"
+  shop_buy: SATIN AL
+  shop_sell_equipment: "EK\u0130PMAN SAT"
+  shop_sell_fish: BALIK SAT
+  shop_not_enough_money: "YETERL\u0130 PARAN YOK"
+  shop_sell_item_one: SAT
+  shop_sell_item_all: "T\xDCM\xDCN\xDC SAT"
+  shop_preview_item: DENE
+  shop_stop_preview: BIRAK
+  shop_you_have_bought: "1 adet {0} sat\u0131n ald\u0131n!"
+  inventory_view_equipment: "EK\u0130PMANI G\xD6R"
+  inventory_view_fish: "BALIKLARI G\xD6R"
+  inventory_wear: "G\u0130Y"
+  inventory_take_off: "\xC7IKAR"
+  question_ask_result_of_equation: "A\u015Fa\u011F\u0131daki i\u015Flemin sonucu
+    nedir?"
+  tutorial_main_welcome: "Matematik Adas\u0131na ho\u015Fgeldin!  Burada matematik
+    her \u015Feydir!"
+  tutorial_main_ask_for_name: "\u0130smini \xF6\u011Frenebilir miyim?"
+  tutorial_main_ask_for_name_placeholder: "\u0130smini Yazmak \u0130\xE7in T\u0131kla!"
+  tutorial_main_shops_and_fishing: "Burada matematik bilgini kullanarak bal\u0131k
+    tutabilirsin! Tuttu\u011Fun bal\u0131klar\u0131 satarak ise para kazanabilirsin!"
+  tutorial_main_items_to_buy: "Kazand\u0131\u011F\u0131n paralar\u0131 adadaki sat\u0131c\u0131lardan
+    \xE7e\u015Fitli e\u015Fyalar alarak kullanabilirsin!"
+  tutorial_main_to_fish: "\u0130lk bal\u0131\u011F\u0131n\u0131 tutmak i\xE7in bir
+    oltaya ihtiyac\u0131n olacak! \u0130lk oltan\u0131 almak i\xE7in adadaki sat\u0131c\u0131lara
+    g\xF6z at!"
+  tutorial_main_to_buy: "Bir sat\u0131c\u0131yla konu\u015Fmak i\xE7in \xFCzerine
+    t\u0131klaman yeterli!"
+  tutorial_shop_welcome: "Pazara ho\u015Fgeldin!"
+  tutorial_shop_can_buy_equipment: "Burada kendine yeni k\u0131yafetler ve e\u015Fyalar
+    alabilirsin."
+  tutorial_shop_can_overview_equipment: "Ald\u0131\u011F\u0131n k\u0131yafetleri
+    daha iyi g\xF6rebilmek i\xE7in karakterine t\u0131klay\u0131p sa\u011Fa sola
+    \xE7ekebilirsin."
+  tutorial_shop_buy_tutorial: "Bir e\u015Fyay\u0131 sat\u0131n almak i\xE7in resmine
+    t\u0131klaman yeterli."
+  tutorial_shop_sell_tutorial: "Unutma daha iyi oltalar al\u0131rsan, daha \xE7ok
+    yanl\u0131\u015F yapma hakk\u0131 kazan\u0131rs\u0131n! Ve tek seferde daha \xE7ok
+    bal\u0131k tutma \u015Fans\u0131n olur!"
+  tutorial_shop_final: "\u0130lk bal\u0131\u011F\u0131n\u0131 tutabilmen i\xE7in
+    bir \"Berbat Olta\" almak iyi bir fikir!"
+  tutorial_fish_welcome: "Art\u0131k bal\u0131k tutmaya haz\u0131rs\u0131n!"
+  tutorial_fish_how_to: "Bir bal\u0131k tutabilmen i\xE7in sana sorulan soruya do\u011Fru
+    cevap vermen yeterli!"
+  tutorial_fish_consequenses: "Fakat dikkat etmen gerek! Denizde bir s\xFCr\xFC a\xE7
+    bal\u0131k da var!"
+  tutorial_fish_consequenses_deep1: "E\u011Fer; <br> -Bir soruyu yanl\u0131\u015F
+    cevaplarsan <br> -Yeterli s\xFCre i\xE7inde cevaplayamazsan ya da <br> -Soruyu
+    cevaplamadan bal\u0131k tutmay\u0131 bititirsen <br> Oltan eskiyecek hatta belki
+    de k\u0131r\u0131lacak!"
+  tutorial_fish_consequenses_deep2: "E\u011Fer oltan k\u0131r\u0131l\u0131rsa yeni
+    bir olta alman gerek!"
+  tutorial_fish_fish_final: "\u0130yi \u015Fanslar!"
+  tutorial_common_click_to_continue: "(Devam etmek i\xE7in t\u0131kla)"
+  tutorial_common_click_to_start_game: "(Oyuna ba\u015Flamak i\xE7in t\u0131kla)"
+  tutorial_common_click_to_end: "(Bitirmek i\xE7in t\u0131kla)"
+  tip_natural_numbers_addition: "Do\u011Fal say\u0131larda toplama i\u015Flemi! \u0130ki
+    elmam var, \xFC\xE7 elma daha ald\u0131m; be\u015F elmam oldu!"
+  tip_natural_numbers_substraction: "Do\u011Fal say\u0131larda \xE7\u0131karma i\u015Flemi!
+    Be\u015F elmam vard\u0131, iki tanesini yedim; \xFC\xE7 elmam kald\u0131!"
+  tip_natural_numbers_multiplication: "Do\u011Fal say\u0131larda \xE7arpma i\u015Flemi!
+    \xC7arp\u0131m tablosunu ezberlersen \xE7ok kolay!"
+  tip_natural_numbers_division: "Do\u011Fal say\u0131larda b\xF6lme i\u015Flemi!
+    \xC7arp\u0131m tablosu biliyorsan \xE7ok kolay!"
+  tip_fractions_addition: "Kesirli say\u0131larda toplama i\u015Flemi yaparken \xF6nce
+    paydalar\u0131 e\u015Fitlemek iyi bir fikir!"
+  tip_fractions_substraction: "Kesirli say\u0131larda \xE7\u0131karma i\u015Flemi
+    yaparken \xF6nce paydalar\u0131 e\u015Fitlemek iyi bir fikir!"
+  tip_fractions_multiplication: "Kesirli say\u0131larda \xE7arpma yaparken pay ve
+    payday\u0131 ayr\u0131 ayr\u0131 \xE7arpabilirsin!"
+  tip_fractions_division: "Kesirli say\u0131larda b\xF6lme yaparken ikinci eleman\u0131
+    ters \xE7evirip, \xE7arpma i\u015Flemi yapabilirsin!"

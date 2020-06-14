@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785dacbce8c883f4b9453d2275e0bf07, type: 3}
+  m_Name: ShoeDatabase
+  m_EditorClassIdentifier: 
+  type: 4
+  items:
+  - {fileID: 500754872029310549, guid: afe4eb7b79e082a4da047838459dbec8, type: 3}
+  - {fileID: 2056172099997371266, guid: 7952607c9f257bb4c8ec581880e8043e, type: 3}
+  - {fileID: 4854288027553129787, guid: af6876f3a4014ef488f4384589adb8ea, type: 3}
+  - {fileID: 7512658888475261317, guid: 792baa247a9a11944961c1fb621d43d8, type: 3}

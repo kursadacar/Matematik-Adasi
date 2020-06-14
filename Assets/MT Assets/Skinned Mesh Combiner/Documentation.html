@@ -1,0 +1,2686 @@
+<html>
+
+    <head>
+        <title>Skinned Mesh Combiner - Documentation</title>
+        <link rel="shortcut icon" type="image/png" href="Files/favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="Files/favicon.png" />
+        <meta charset="UTF-8">
+        <!-- #region CSS FORMATATION -->
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+            }
+
+            body {
+                background-color: #686868;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                font-family: gotham, arial, helvetica, sans-serif;
+                font-size: 14px;
+                color: #303030;
+                padding: 0;
+                margin: 0 auto !important;
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #888;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+            a {
+                text-decoration: none;
+                color: #374f77;
+            }
+
+            a:link {
+                text-decoration: none;
+                color: #374f77;
+            }
+
+            a:hover {
+                color: #374f77;
+                text-decoration: underline dotted #3a505b;
+            }
+
+            a:visited {
+                color: #374f77;
+                text-decoration: none;
+            }
+
+            hr {
+                border: 0;
+                height: 1px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(206, 206, 206, 0.75), rgba(0, 0, 0, 0));
+            }
+
+            .topBar {
+                z-index: 2;
+                width: 100%;
+                height: 45px;
+                position: fixed;
+                top: 0px;
+                background-color: #375e9b;
+                -webkit-box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.56);
+                -moz-box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.56);
+                box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.56);
+            }
+
+            .summary {
+                position: fixed;
+                background-color: yellow;
+                left: 0px;
+                overflow: auto;
+                top: 45px;
+                background-color: #f9f9f9;
+                width: 300px;
+                height: 100%;
+                -webkit-box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.56);
+                -moz-box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.56);
+                box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.56);
+            }
+
+            .subBody {
+                margin-top: 45px;
+                margin-left: 300px;
+                padding-left: 5%;
+                padding-right: 5%;
+                overflow: auto;
+                background-color: #ffffff;
+            }
+
+            .content {
+                width: 100%;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+
+            .summary-title {
+                color: #0c0c0c;
+                margin-top: 20px;
+                margin-bottom: 30px;
+                font-size: 16px;
+                font-weight: bolder;
+            }
+
+            .title-1 {
+                color: #0c0c0c;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                margin-left: 15px;
+                font-size: 20px;
+                font-weight: bolder;
+            }
+
+            ul {
+                list-style-type: circle;
+                font-weight: normal;
+                font-size: 14px;
+            }
+
+            li {
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+
+            .video {
+                background-color: #f2f2f2;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #595959;
+                font-style: italic;
+                text-align: center;
+            }
+
+            .image {
+                background-color: #f2f2f2;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #595959;
+                font-style: italic;
+                text-align: center;
+            }
+
+            .footer {
+                margin-top: 200px;
+                margin-bottom: 200px;
+            }
+
+            .script {
+                background-color: #f2f2f2;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #595959;
+                width: auto;
+            }
+
+            textArea {
+                font-family: "Courier New", Courier, monospace;
+                padding: 10px;
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+                resize: none;
+            }
+
+            table,
+            td,
+            th {
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+        </style>
+        <!-- #endregion -->
+        <script src="Files/Prism/prism.js"></script>
+        <link rel="stylesheet" href="Files/Prism/prism.css">
+    </head>
+
+    <body>
+        <!-- #region PAGE TOPBAR -->
+        <!-- Topbar -->
+        <div class="topBar">
+            <div style="float: left; height: 45px; margin: 3px;">
+                <img src="Files/MTW.png" height="40px" />
+            </div>
+            <div style="float: left; height: 45px;">
+                <div
+                    style="line-height: 33px; vertical-align: middle; margin-left: 3px; color: #ffffff; font-weight: bold; font-size: 22px;">
+                    Skinned Mesh Combiner Documentation
+                </div>
+                <div
+                    style="line-height: 8px; vertical-align: middle; margin-left: 3px; color: #d3d3d3; font-size: 10px;">
+                    for Unity Engine
+                </div>
+            </div>
+            <div style="float: right; height: 45px;">
+                <div
+                    style="line-height: 16px; vertical-align: middle; margin-right: 10px; color: #d3d3d3; font-size: 10px; text-align: right;">
+                    for support and contact
+                </div>
+                <div
+                    style="line-height: 25px; vertical-align: middle; margin-right: 10px; color: #ffffff; font-weight: bold; font-size: 16px;">
+                    mtassets@windsoft.xyz
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
+        <!-- Summary -->
+        <div class="summary">
+            <div class="summary-title">
+                <center>Summary of Documentation</center>
+            </div>
+            <ul>
+                <li><a href="#1">What is the Skinned Mesh Combiner</a></li>
+                <li><a href="#2">First steps to combine</a></li>
+                <li><a href="#3">How to combine meshes (In Editor)</a></li>
+                <li><a href="#4">How to combine meshes (At Runtime)</a></li>
+                <li>One Mesh Per Material (Merge Method)</li>
+                <ul>
+                    <li><a href="#5">How this method works</a></li>
+                    <li><a href="#6">Pros</a></li>
+                    <li><a href="#7">Cons</a></li>
+                </ul>
+                <li>All In One (Merge Method)</li>
+                <ul>
+                    <li><a href="#8">How this method works</a></li>
+                    <li><a href="#9">Pros</a></li>
+                    <li><a href="#10">Cons</a></li>
+                </ul>
+                <li>Just Material Colors (Merge Method)</li>
+                <ul>
+                    <li><a href="#19">How this method works</a></li>
+                    <li><a href="#20">Pros</a></li>
+                    <li><a href="#21">Cons</a></li>
+                </ul>
+                <li>Only Anima2D Meshes (Merge Method)</li>
+                <ul>
+                    <li><a href="#24">How this method works</a></li>
+                    <li><a href="#25">Pros</a></li>
+                    <li><a href="#26">Cons</a></li>
+                    <li><a href="#27">Problems with the drawing order of the combined sprites</a></li>
+                    <li><a href="#27a">Warning About Anima2D</a></li>
+                </ul>
+                <li><a href="#11">Undoing the Merge</a></li>
+                <li><a href="#11aa">The "Merge" Tab</a></li>
+                <li><a href="#11ab">The "Stats" Tab</a></li>
+                <li><a href="#11ac">The "Logs Of Merge" Tab</a></li>
+                <li><a href="#22">Using additional effects like Normal Maps, Height Maps, and more</a></li>
+                <li><a href="#11a">Tip to avoid differences in positioning of Normal Maps and other Maps in the mesh
+                        resulting from the merge</a></li>
+                <li><a href="#22a">Edges Mip Map Size Tip</a></li>
+                <li><a href="#22b">Monitoring all Resources (Like Meshes/Materials) found by SMC before merging</a></li>
+                <li><a href="#22c">Defining Which Meshes To Ignore When Merging</a></li>
+                <li><a href="#22d">Merge Events</a></li>
+                <li><a href="#18">How to Create Prefabs with SMC</a></li>
+                <li><a href="#12">Current Limitations of the SMC</a></li>
+                <li><a href="#14">Optimization tips for using SMC</a></li>
+                <li><a href="#23">Fixing Compile Error "The type or namespace name `Anima2D' could not be found. Are you
+                        missing an assembly reference?"</a></li>
+                <li><a href="#23aa">Fixing Runtime Merge Error "Cannot combine mesh that does not allow access:
+                        MeshName..."</a></li>
+                <li><a href="#23ab">Why isn't my atlas completely filled with my character's textures?</a></li>
+                <li><a href="#23aba">Why do the tiled textures look stretched or look strange after merge?</a></li>
+                <li><a href="#23abc">After combining my mesh using Improved Mode, a part of my character has the texture
+                        in the wrong place. Why does it
+                        happen?</a></li>
+                <li><a href="#23ac">Warning before using SMC with HDRP, URP or different standard shaders</a></li>
+                <li>Skinned Meshes Bones Manager</li>
+                <ul>
+                    <li><a href="#23a">About This Component</a></li>
+                    <li><a href="#23b">Visualizing The Hierarchy of Bones That Animates a Mesh</a></li>
+                    <li><a href="#23c">Visualizing All Vertices Influenceds By a Bone</a></li>
+                    <li><a href="#23d">Making a Mesh Use The Bone Hierarchy of Another Mesh, To Be Animated.
+                            Customizable Character, Several FBX Files, One For Each Outfit.</a></li>
+                    <li><a href="#23e">Runtime API Of This Component</a></li>
+                </ul>
+                <li><a href="#15">Demo Scene</a></li>
+                <li>Runtime API Of Component</li>
+                <ul>
+                    <li><a href="#15a">Combining Meshes</a></li>
+                    <li><a href="#15b">Undo merge</a></li>
+                    <li><a href="#15c">Checking if meshes are merged</a></li>
+                    <li><a href="#15d">Getting the mesh resulting from the merge</a></li>
+                    <li><a href="#15e">Converting the combined mesh to a static mesh</a></li>
+                    <li><a href="#15f">Undoing the combined mesh to static mesh</a></li>
+                    <li><a href="#15g">Verifying that the mesh resulting from the merge has been converted to static</a>
+                    </li>
+                    <li><a href="#15h">Getting the mesh converted to static</a></li>
+                </ul>
+                <li><a href="#16">Settings e Options Of Component</a></li>
+                <li><a href="#17">Contact and Support</a></li>
+            </ul>
+            <br />
+            <br />
+            <br />
+        </div>
+        <!-- Content -->
+        <div class="subBody">
+            <div class="content">
+
+                <!-- #region Welcome to Skinned Mesh Combiner Documentation! -->
+                <br />
+                <div class="title-1">
+                    Welcome to Skinned Mesh Combiner Documentation!
+                </div>
+                By reading this documentation, you will understand how Skinned Mesh Combiner works and how to use it and
+                get
+                the most out of it. Come on! Make sure that this HTML file is in the same directory as the "Files"
+                folder.
+                This way you will not have problems with formatting and displaying the videos on the page.
+                <br />
+                <br />
+                <div style="padding: 16px; border-radius: 4px; background-color: #ff000050; color: #242424;">
+                    <p>If you still have problems with the tool, even after consulting this documentation, please
+                        contact
+                        <b>mtassets@windsoft.xyz</b> for help and support. If you have any questions, problems or
+                        feedback,
+                        feel free to contact me! I am always willing to help, open to suggestions and always do my best
+                        to
+                        offer a quick and useful service to my customers!</p>
+                </div>
+                <br />
+                <br />
+                <!-- #endregion -->
+
+                <!-- #region What is the Skinned Mesh Combiner -->
+                <div class="title-1" id="1">
+                    What is the Skinned Mesh Combiner
+                </div>
+                The Skinned Mesh Combiner is a tool that will help you merge the meshes that use the Skinned Mesh
+                Renderer.
+                The Skinned Mesh Combiner only works with this type of mesh. The Skinned Mesh Combiner has some merging
+                methods,
+                each method has its positive and negative sides, you can see this below in the documentation. See the
+                video
+                demo below and follow the reduction of draw calls with each type of merge.
+                <div class="video">
+                    <center>
+                        <iframe width="80%" height="310px" class="tscplayer_inline" id="embeddedSmartPlayerInstance"
+                            src="Files/Videos/Video-WhatIs/PlayerLocal.html?embedIFrameId=embeddedSmartPlayerInstance"
+                            scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen
+                            allowFullScreen></iframe>
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region First steps to combine -->
+                <div class="title-1" id="2">
+                    First steps to combine
+                </div>
+                Before you begin to merge your meshes, you must first prepare the entire GameObjects hierarchy and
+                properly
+                validate Skinned Mesh Renderers.
+                <br />
+                <br />
+                <b>Step 1</b> - Your hierarchy of Skinned Meshes should be as shown in the image below. For example, if
+                you
+                want to combine a character, your meshes must be organized the way you explain the image below...
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/1.png" />
+                        <br />
+                        "Character GameObject" must have the Animator that will be responsible for executing the
+                        animations
+                        of its Skinned Meshes. The Skinned Mesh Combiner should be in the Root GameObject (Character),
+                        because when you start the merge, the Skinned Mesh Combiner will search for all the Skinned
+                        Mesh affiliated with it. Each GameObject "SkinnedMeshX" image contains a Skinned Mesh Renderer.
+                    </center>
+                </div>
+                <b>Step 2</b> - Make sure all of your meshes have materials associated with them. Meshes that have empty
+                materials will be ignored during the merge.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/2.png" />
+                        <br />
+                        Avoid leaving null materials on Skinned Mesh Renderers. This also helps with optimization.
+                    </center>
+                </div>
+                <b>Step 3</b> - Prevent your Skinned Mesh Renderers from having null meshes, as any Skinned Mesh
+                Renderer
+                that has null meshes will be ignored during the merge process.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/2a.png" />
+                        <br />
+                    </center>
+                </div>
+                <b>Step 4</b> - Make sure that all the materials that your meshes use have Main Textures. This is not an
+                obligation, and depends on the merging mode, but it may be good to have textures associated with all
+                materials.
+                <br />
+                <br />
+                <b>Step 5</b> - Now that everything is ready, it's just you to combine the meshes! For this, keep
+                reading.
+                <!-- #endregion -->
+
+                <!-- #region How to combine meshes (In Editor) -->
+                <div class="title-1" id="3">
+                    How to combine meshes (In Editor)
+                </div>
+                To combine meshes using the editor, it's very simple and easy! Let's go step by step. With this method,
+                you
+                will not need to use any line of code, and in addition, when the scene starts your meshes will already
+                be
+                combined!
+                <br />
+                <br />
+                <b>Step 1</b> - Add the "Skinned Mesh Combiner" component to the root GameObject of your skinned meshes.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/3.png" />
+                        <br />
+                        Select the root GameObject for your model. Then click "Add Component." Search for "Skinned Mesh
+                        Combiner". Then just add the component that appears in the image above.
+                    </center>
+                </div>
+                <b>Step 2</b> - Select the Merge Method. Each merge method has advantages and disadvantages, and each
+                one
+                meshes the meshes in a different way. We'll talk about the merge methods below in the documentation.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/4.png" />
+                        <br />
+                        <br />
+                        Just click on the "Merge Method" box and choose one of the options. (<b>
+                            <font style="color: #ce0000;">Some merge methods will provide you with a variable called
+                                "Material To Use".</font>
+                        </b> You must provide a material to be used by the mesh resulting from the merge. Skinned Mesh
+                        Combiner will apply the material you supply, that is, a copy of the material you supply, and
+                        will
+                        apply it to the combined mesh.)
+                    </center>
+                </div>
+                <b>Step 3</b> - Click the "Combine Meshes!" Button.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/5.png" />
+                        <br />
+                        Notice: The merge process varies according to the method chosen, the number of vertices that the
+                        meshes have, and the size of their textures.
+                    </center>
+                </div>
+                <b>Step 4</b> - Wait a few moments and when the "Combine Meshes!" switching to "Undo Merge" means that
+                the
+                meshes were combined! After combining, new meshes will be generated and old
+                meshes will be deactivated. You can always disable the merge whenever you want!
+                <br><br>
+                Automatically, the Skinned Mesh Combiner will also show you the "Logs Of Merge" tab that contains all
+                messages generated by the Skinned Mesh Combiner while the merge was being performed. This is how the
+                Skinned
+                Mesh Combiner communicates with you, in case you find something wrong, or think it's important to let
+                you
+                know!
+                <br><br>
+                <b>- This was the basics for you to combine the stitches of your models! Continue reading the
+                    documentation
+                    to understand more about all the features of the Skinned Mesh Combiner!</b>
+                <!-- #endregion -->
+
+                <!-- #region How to combine meshes (At Runtime) -->
+                <div class="title-1" id="4">
+                    How to combine meshes (At Runtime)
+                </div>
+                It's also easy to combine meshes while your game runs! However, avoid combining meshes repeatedly in a
+                short
+                time, this can lead to a high memory expense, and depending on the merge method, can cause freezes in
+                your
+                game. Then use this function with caution.
+                Currently, the best method of merge at runtime is the "One Mesh Per Material". You can read about all
+                the
+                methods below in the documentation. Then follow the steps below to merge at run time.
+                <br />
+                <br />
+                <b>Step 1</b> - First, import the "MTAssets" library into your script, because without it you will not
+                be
+                able to access the classes of this tool.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using MTAssets.SkinnedMeshCombiner;
+</code></pre>
+                </div>
+                <b>Step 2</b> - Find the root GameObject that has the "Skinned Mesh Combiner" component. Then get the
+                "Skinned Mesh Combiner" component. See an example below.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+void Start()
+{
+    SkinnedMeshCombiner combiner = RootGameObject.GetComponent&ltSkinnedMeshCombiner&gt();
+}
+</code></pre>
+                </div>
+                <b>Step 3</b> - Then call the "CombineMeshes()" method of the Skinned Mesh Combiner. When you call this
+                method, the merge will start instantly. The merge method to be used will be what is defined in the
+                Skinned
+                Mesh Combiner component at the time of calling this function.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+void Start()
+{
+    SkinnedMeshCombiner combiner = RootGameObject.GetComponent&ltSkinnedMeshCombiner&gt();
+    combiner.CombineMeshes();
+}
+</code></pre>
+                </div>
+                - If you want to see if your meshes are currently merged, see the method "isMeshesCombined()".
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+void Start()
+{
+    if(combiner.isMeshesCombined() == true)
+    {
+        //Do something
+    }
+}
+</code></pre>
+                </div>
+                - If you want to undo the merge, just call the "UndoCombineMeshes(true, true)" function.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+void Start()
+{
+    SkinnedMeshCombiner combiner = RootGameObject.GetComponent&ltSkinnedMeshCombiner&gt();
+    combiner.UndoCombineMeshes(true, true);
+    //First parameter: Run unity Garbage Collector after undo merge?
+    //Second parameter: Run mono/il2cpp Garbage Collector after undo merge?
+}
+</code></pre>
+                </div>
+                - See below for a code example to perform a run-time merge using the All In One method.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using MTAssets.SkinnedMeshCombiner;
+    
+    public class demo : MonoBehaviour {
+    
+        //Public variables
+        public GameObject characterGameObject;
+        public SkinnedMeshCombiner combiner;
+        public Material materialToUseInMergedMeshes;
+    
+        //To ignore during merge
+        public GameObject aGameObjecToIgnore1;
+        public GameObject aGameObjecToIgnore2;
+    
+        void Start () {
+            //Find the combiner
+            combiner = characterGameObject.GetComponent&ltSkinnedMeshCombiner&gt();
+    
+            //Start merging all meshes
+            MergeAllMeshes();
+        }
+    
+        void MergeAllMeshes()
+        {
+            //Configure all variables
+            combiner.mergeMethod = SkinnedMeshCombiner.MergeMethod.AllInOne;
+    
+            combiner.allInOneParams.materialToUse = materialToUseInMergedMeshes;
+            combiner.allInOneParams.atlasResolution = SkinnedMeshCombiner.AtlasSize.Pixels2048x2048;
+            combiner.allInOneParams.mergeOnlyEqualsRootBones = false;
+            combiner.nameOfThisMerge = "Amazing Merge!";
+            //You can change the value of any variable you want, the Skinned Mesh Combiner, much more than that!...
+            //combiner.onemeshpermaterial for variables of One Mesh Per Material merge method
+            //combiner.allInOneParams for variables of All In One merge method
+            //combiner.justMaterialColors for variables of Just Material Colors merge method
+            //combiner.onlyAnima2dMeshes for variables of Only Anima2D Meshes merge method
+    
+            //add the gameobjects to ignore
+            if (combiner.gameObjectsToIgnore == null)
+                combiner.gameObjectsToIgnore = new List&ltGameObject&gt();
+            combiner.gameObjectsToIgnore.Add(aGameObjecToIgnore1);
+            combiner.gameObjectsToIgnore.Add(aGameObjecToIgnore2);
+    
+            //Add the on done merge events
+            combiner.onCombineMeshs.AddListener(OnDoneMerge);
+            combiner.onUndoCombineMeshs.AddListener(OnUndoMerge);
+    
+            combiner.launchConsoleLogs = true;
+    
+            //Start the merge
+            combiner.CombineMeshes();
+        }
+    
+        void OnDoneMerge()
+        {
+            Debug.Log("Meshes merged!");
+        }
+    
+        void OnUndoMerge()
+        {
+            Debug.Log("Meshes not merged! :(");
+        }
+    
+        void UndoTheMergeOfAllMeshes()
+        {
+            //Undo the merge
+            combiner.UndoCombineMeshes(true, true);
+        }
+    }
+    
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region How this method works (One Mesh Per Material Merge Method) -->
+                <div class="title-1" id="5">
+                    How this method works (One Mesh Per Material Merge Method)
+                </div>
+                Briefly speaking, the "One Mesh Per Material" method combines all meshes that share the same material
+                into
+                one. So if you have 5 meshes that use material A, those 5 meshes will be combined in 1 mesh, which will
+                use
+                this material A. I will explain more precisely below.
+                <br />
+                <br />
+                First the Skinned Mesh Combiner looks for the Skinned Meshes that are the childrens of the GameObject in
+                which it is. Then, the Skinned Mesh Combiner groups meshes that use the same material. When you have a
+                mesh
+                that uses more than 1 material, the Skinned Mesh
+                Combiner will separate the faces of this mesh according to each material.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/6.png" />
+                        <br />
+                        Each box represents a GameObject containing the Skinned Mesh Renderer. Green boxes use material
+                        A,
+                        blue boxes use material B and brown boxes use material C.
+                    </center>
+                </div>
+                After separating each mesh, it creates a new GameObject. This new GameObject will group the new meshes
+                resulting from the merge.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/7.png" />
+                        <br />
+                    </center>
+                </div>
+                Then after that, the Skinned Mesh Combiner will combine all the meshes and submeshes that share the same
+                material, and insert all into a one mesh inside the GameObject created in past step.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/7.png" />
+                        <br />
+                    </center>
+                </div>
+                And finally, the Skinned Mesh Combiner simply disables the old meshes.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/9.png" />
+                        <br />
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Pros Of "One Mesh Per Material" Merge Method -->
+                <div class="title-1" id="6">
+                    Pros Of "One Mesh Per Material" Merge Method
+                </div>
+                <ul>
+                    <li>It is the most optimized and fastest merge method</li>
+                    <li>Does not modify any texture, material or UV</li>
+                    <li>Can combine meshes that use any type of materials</li>
+                    <li>Does not generate too much memory garbage</li>
+                    <li>It is the simplest method of merge</li>
+                    <li>The lower the amount of materials, the greater the reduction of draw calls</li>
+                    <li>Can be called more often than the "All In One" method</li>
+                    <li>Fully compatible with mipmaps</li>
+                    <li>Keeps animations intact</li>
+                    <li>Can be used while Animator performs animations</li>
+                    <li>You do not need "Read/Write enabled" permissions in the textures import settings</li>
+                    <li>It is compatible with all types of meshes!</li>
+                    <li>It is compatible with Normal Maps, Height Maps and other types of effects.</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region Cons Of "One Mesh Per Material" Merge Method -->
+                <div class="title-1" id="7">
+                    Cons Of "One Mesh Per Material" Merge Method
+                </div>
+                <ul>
+                    <li>Does not always reduce draw calls dramatically</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region How this method works (All In One Merge Method) -->
+                <div class="title-1" id="8">
+                    How this method works (All In One Merge Method)
+                </div>
+                Briefly speaking, the "All In One" method will merge all meshes into one, and only one new mesh will be
+                generated that will be the junction of all the others. Then it will merge all the textures into one
+                atlas,
+                and will insert that atlas into a new material. At the end, this material will be inserted into the
+                unique
+                mesh. With this merge method, all the textures to be merged must have the "Read/Write enabled" option in
+                the
+                import settings.
+                If you have 5 meshes, only 1 mesh, 1 material and 1 atlas will remain after the merge. This method is a
+                bit
+                more complex, so try to understand well how it works before using it. In addition, this method is not
+                compatible with any mesh.
+                <br><br>
+                <b>Some meshes can offer problems for this method</b>, according to the way in which they were created.
+                For
+                example, some meshes may contain errors in your UV map, which can generate errors during the merge,
+                however,
+                <b>the vast majority of the tested meshes did not result in errors during the merge and everything
+                    worked
+                    perfectly in tests!</b>
+                <br />
+                <br />
+                First, it merges all the meshes together, creating a new mesh that is the junction of all. However, this
+                new
+                mesh does not have any material.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/10.png" />
+                        <br />
+                    </center>
+                </div>
+                After you provide a custom material (Material To Use), the Skinned Mesh Combiner will copy your material
+                when creating the new material. This new created material will be inserted into the created mesh.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/11.png" />
+                        <br />
+                    </center>
+                </div>
+                After this, the Skinned Mesh Combiner will extract the texture of each old mesh and will create an atlas
+                texture. It will create atlas textures according to your preferences, being able to create atlas with
+                textures, normal maps, occlusion maps and etc.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/12.png" />
+                        <br />
+                    </center>
+                </div>
+                Then the created mesh will have its UVs modified so that it can receive the new atlas. Then the atlas is
+                inserted into the new mesh created.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/13.png" />
+                        <br />
+                    </center>
+                </div>
+                Finally, old meshes are disabled. Resting only the mesh created with its material and texture with
+                atlas.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/14.png" />
+                        <br />
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Pros Of "All In One" Merge Method -->
+                <div class="title-1" id="9">
+                    Pros Of "All In One" Merge Method
+                </div>
+                <ul>
+                    <li>Most of the time, it dramatically reduces the amount of draw calls</li>
+                    <li>Always reduce calls to 1 draw call, regardless of how many meshes you have</li>
+                    <li>Keeps animations intact</li>
+                    <li>Can be used while Animator performs animations</li>
+                    <li>When you combine compatible meshes with this method, it returns optimum performance</li>
+                    <li>It can work with effects like Normal Maps, Height Maps and the like.</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region Cons Of "All In One" Merge Method -->
+                <div class="title-1" id="10">
+                    Cons Of "All In One" Merge Method
+                </div>
+                <ul>
+                    <li>It has a longer processing time, depending on the size of the textures, amount of meshes and
+                        vertices.</li>
+                    <li>Modifies UVs, materials and textures</li>
+                    <li>Meshes that have the UV map larger than the texture (to repeat the texture in the mesh) may have
+                        the
+                        lowest texture</li>
+                    <li>It can generate a higher amount of garbage if compared to the "One Mesh Per Material"</li>
+                    <li>It can not be called as much as the "One Mesh Per Material" if you want your game to be fast
+                    </li>
+                    <li>You need to enable the "Read/Write enabled" option for all model textures in the import
+                        settings.
+                    </li>
+                    <li>Always be tested so you know if you will get a desired result</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region How this method works (Just Materials Colors Merge Method) -->
+                <div class="title-1" id="19">
+                    How this method works (Just Materials Colors Merge Method)
+                </div>
+                The "Just Material Colors" merge method only merges the colors of the materials in your meshes. To do
+                this,
+                it collects the color of each material that its meshes use, creates an atlas that contains a palette
+                of colors for each mesh that was mixed, then color that mesh with its respective color. It is a very
+                simple
+                merge method and made for people who need to merge their models that do not use textures, just material
+                colors!
+                <br />
+                <br />
+                First, it merges all the meshes together, creating a new mesh that is the junction of all. However, this
+                new
+                mesh does not have any material.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/10.png" />
+                        <br />
+                    </center>
+                </div>
+                Then a new material is created from the material you provide (Material To Use). This new created
+                material
+                will be inserted into the created mesh.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/11.png" />
+                        <br />
+                    </center>
+                </div>
+                After this, the Skinned Mesh Combiner extracts the color of each material that its meshes use, and
+                inserts
+                those colors into an atlas.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/12.png" />
+                        <br />
+                    </center>
+                </div>
+                Then the created mesh will have its UVs modified so that it can receive the new atlas. Then the atlas is
+                inserted into the new mesh created.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/13.png" />
+                        <br />
+                    </center>
+                </div>
+                Finally, old meshes are disabled. Resting only the mesh created with its material and texture with
+                atlas.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/14.png" />
+                        <br />
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Pros Of "Just Material Colors" Merge Method -->
+                <div class="title-1" id="20">
+                    Pros Of "Just Material Colors" Merge Method
+                </div>
+                <ul>
+                    <li>Most of the time, it dramatically reduces the amount of draw calls</li>
+                    <li>Always reduce calls to 1 draw call, regardless of how many meshes you have</li>
+                    <li>Keeps animations intact</li>
+                    <li>Can be used while Animator performs animations</li>
+                    <li>Perfect for combining just the colors of your model, no need for textures.</li>
+                    <li>It is optimized and fastest merge method.</li>
+                    <li>Does not generate too much memory garbage.</li>
+                    <li>It is the simplest method of merge</li>
+                    <li>Can be called more often than the "All In One" method</li>
+                    <li>Fully compatible with mipmaps system</li>
+                    <li>You do not need "Read/Write enabled" permissions in the textures import settings</li>
+                    <li>It is compatible with all types of meshes!</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region Cons Of "Just Material Colors" Merge Method -->
+                <div class="title-1" id="21">
+                    Cons Of "Just Material Colors" Merge Method
+                </div>
+                <ul>
+                    <li>This merge method works only with material colors. Any kind of texture is simply ignored.</li>
+                    <li>It does not support special effects like Normal Maps and the like.</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region How this method works (Only Anima2D Meshes Merge Method) -->
+                <div class="title-1" id="24">
+                    How this method works (Only Anima2D Meshes Merge Method)
+                </div>
+                This merge method is unique to the Skinned Meshes generated by the Unity Technologies Anima2D tool, and
+                only
+                works when the tool is also installed in your project. The merge process is similar to "All In One", but
+                only works with Anima2D (Sprite Mesh Instance) meshes.
+                <br />
+                <br />
+                First, it combines all sprite meshes and sprites in just one mesh and one atlas.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/10.png" />
+                        <br />
+                    </center>
+                </div>
+                After this, the Skinned Mesh Combiner adds a Combined Mesh Manager script to render atlas in merged
+                mesh.
+                This script is responsible for collecting the sprites, creating a new material, and applying the
+                rendering
+                data to the merged mesh, repeating the process with each frame.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/11.png" />
+                        <br />
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Pros Of "Only Anima2D Meshes" Merge Method -->
+                <div class="title-1" id="25">
+                    Pros Of "Only Anima2D Meshes" Merge Method
+                </div>
+                <ul>
+                    <li>Most of the time, it dramatically reduces the amount of draw calls</li>
+                    <li>Always reduce calls to 1 draw call, regardless of how many meshes you have</li>
+                    <li>Keeps animations intact</li>
+                    <li>Can be used while Animator performs animations</li>
+                    <li>Perfect for combining Sprite Mesh Instances from your character, no need for textures.</li>
+                    <li>It is optimized and fastest merge method.</li>
+                    <li>Does not generate too much memory garbage.</li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region Cons Of "Only Anima2D Meshes" Merge Method -->
+                <div class="title-1" id="26">
+                    Cons Of "Only Anima2D Meshes" Merge Method
+                </div>
+                <ul>
+                    <li>Does not match Sprite Mesh Instance colors.</li>
+                    <li>You need to enable the "Read/Write enabled" option for all model textures in the import
+                        settings.
+                    </li>
+                </ul>
+                <!-- #endregion -->
+
+                <!-- #region Problems with the drawing order of the Combined Sprites Meshes -->
+                <div class="title-1" id="27">
+                    Problems with the drawing order of the Combined Sprites Meshes
+                </div>
+                Sometimes, by combining the sprites of your characters, you may notice that some sprites are over other
+                sprites, an unwanted effect. For example, an arm may lie on top of the body of the character (which
+                should
+                be behind the body).
+                <br />
+                <br />
+                See the example below.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/23.png" />
+                        <br />
+                        In the example, the body remained on the left arm and the neck remained on the face. That was
+                        not
+                        the expected result.
+                    </center>
+                </div>
+                To correct this, we must change the GameObjects order of each part of the character in the hierarchy and
+                this must be done before the merge begins. So we can organize which sprites will be on top of others.
+                Knowing this need, the Skinned Mesh Combiner has
+                a tool that provides you with an intuitive and easy to understand interface, so you can organize the
+                rendering order of your character's meshes, all quickly and in a functional way! After organizing your
+                character's meshes with this tool, the same rederization
+                order you defined will be used, both after merging, as well as before doing it!
+                <br>
+                <br>
+                In the Skinned Mesh Combiner component, you need to be using the "Only Anima2D Meshes" blending method.
+                So
+                if the Skinned Mesh Combiner detects meshes to be combined, it will show you the "Set Correct Sprite
+                Meshes
+                Rendering Order" button.
+                Click this button and the mesh rendering order organization interface will appear, so just use the / \
+                and \
+                / buttons to organize the mesh order. The higher a mesh is at the top, the higher it will be rendered
+                over
+                the others.
+                <div class="video">
+                    <center>
+                        <iframe width="80%" height="310px" class="tscplayer_inline" id="embeddedSmartPlayerInstance"
+                            src="Files/Videos/24/PlayerLocal.html?embedIFrameId=embeddedSmartPlayerInstance"
+                            scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen
+                            allowFullScreen></iframe>
+                    </center>
+                    <br />
+                    This video shows the process of organizing the character's meshes, as well as the meshes remained
+                    after performing a merge.
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Warning About Anima2D -->
+                <div class="title-1" id="27a">
+                    Warning About Anima2D
+                </div>
+                Anima2D is a tool developed and maintained by Unity Technologies, and like any other tool, it is also
+                subject to bugs and flaws. Sometimes, after combining the meshes, you may notice some bugs in the
+                meshes,
+                but in the vast majority
+                of cases the problem is caused by a flaw in the Anima2D scripts. Usually, recreating your character's
+                bone
+                structure or merging again can solve this problem. Usually the most common bugs are related to the
+                rendering
+                order of the Sprite
+                Meshes after combined. You can always use the tool mentioned in the previous topic. If you need help,
+                just
+                contact mtassets@windsoft.xyz!
+                <!-- #endregion -->
+
+                <!-- #region Undoing the Merge -->
+                <div class="title-1" id="11">
+                    Undoing the Merge
+                </div>
+                When you undo the merged meshes that were previously generated are deleted from the scene, and the old
+                meshes are re-activated. It's that simple! This is all done automatically. <b>Never attempt to manually
+                    delete the meshes</b> after a successful merge,
+                because when you undo the merge, the Skinned Mesh Combiner will undo all that has been done and restore
+                the
+                meshes correctly.
+                <!-- #endregion -->
+
+                <!-- #region The "Merge" Tab -->
+                <div class="title-1" id="11aa">
+                    The "Merge" Tab
+                </div>
+                In this tab, you operate all parameters related to the merging of your character's meshes, such as, for
+                example, monitoring resources found to be merged, changing atlas resolution and etc.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/34.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                When your character has the combined meshes, the interface will change to something like this. In this
+                part,
+                you can export the generated atlases, and in this tab, now with the combined meshes, the Skined Mesh
+                Combiner will always be monitoring the merge.
+                If he finds something wrong (like the lack of files generated during the merge) he can recommend you to
+                redo
+                the merge!
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/35.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region The "Stats" Tab -->
+                <div class="title-1" id="11ab">
+                    The "Stats" Tab
+                </div>
+                This tab shows all the optimization statistics after performing a merge, things like optimization rate,
+                verified vertices, combined meshes, etc. You can also see a list of all the resources that were
+                generated
+                and saved in your project, after the merge has been done.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/36.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region The "Logs Of Merge" Tab -->
+                <div class="title-1" id="11ac">
+                    The "Logs Of Merge" Tab
+                </div>
+                This tab stores all the logs generated after the last time you clicked the "Combine Meshes!" Button. If
+                an
+                error occurs during the merge, this is where you will see what caused the error. If the merge was
+                successful, here you can see which logs were generated during
+                the merge. Skinned Mesh Combiner can issue logs, warnings, etc., and everything will be stored here so
+                you
+                can keep track. For example, if the Skinned Mesh Combiner was unable to combine a texture for some
+                reason, a
+                log will be posted here, to let you know.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/37.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Using additional effects like Normal Maps, Height Maps, and more -->
+                <div class="title-1" id="22">
+                    Using additional effects like Normal Maps, Height Maps, and more
+                </div>
+                <b>One Mesh Per Material:</b> The "One Mesh Per Material" method can merge your meshes with special
+                effects
+                automatically without any problem, plus you will not have to configure anything other than your own
+                shaders.
+                <br>
+                <br>
+                <b>Just Material Colors:</b> The "Just Material Colors" method is designed to support only material
+                colors,
+                so it does not support texture merging or special effects.
+                <br>
+                <br>
+                <b>Only Anima2D Meshes:</b> The "Just Material Colors" method is designed to support only material
+                colors,
+                so it does not support texture blending or special effects.
+                <br>
+                <br>
+                <b>All In One:</b> "All In One" supports special effects of your materials! You just need to enable
+                support
+                and configure it. After that, just merge! See below how to do the procedure.
+                <br />
+                <br />
+                <b>Step 1</b> - First, activate support for the effect you want.
+                <br>
+                <br>
+                When you activate support for an effect, the Skinned Mesh Combiner, in addition to creating an atlas for
+                your model's textures, it will also create an atlas with the textures of the effect you want. This atlas
+                will be based on the texture atlas of your model.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/19.png" />
+                        <br />
+                        Presentation
+                    </center>
+                </div>
+                <b>Step 2</b> - Select the property of your model materials, which store the texture / map of the
+                desired
+                effect! This is how the Skinned Mesh Combiner will know where to look for the textures of the effect
+                that
+                you also want to apply, to combine them!
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/20.png" />
+                        <br />
+                        The properties of the materials are like "variables" that store a texture. In the example above,
+                        the
+                        "_BumpMap" property (named Normal Map in Standard material Inspector) stores the normal map
+                        textures.
+                        <br><br>
+                        Skinned Mesh Combiner will scan the properties of all materials found in your model, and will
+                        allow
+                        you to select the property you want Skinned Mesh Combiner to find the textures/maps of the
+                        desired
+                        effect.
+                        That way you won't get lost! By default, Skinned Mesh Combiner will already show you the default
+                        property that stores such an effect.
+                    </center>
+                </div>
+                <b>Step 3</b> - Select the material property you provided (Material To Use) to store the atlas of the
+                desired effect. In this case, the "_BumpMap" property of the material I supplied (my material is a
+                Standard)
+                will be responsible for storing the normal maps atlas that the Skinned Mesh Combiner generates.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/21.png" />
+                        <br />
+
+                    </center>
+                </div>
+                <b>Property Name To Find:</b> It is nothing more than the name of the variable that stores the textures
+                of
+                the desired effect in its materials. For example, if you have enabled Normal Maps support, the Skinned
+                Mesh
+                Combiner will look for the variable "_BumpMap" in each shader of each material in your mesh, when the
+                Skinned Mesh Combiner finds this variable it will extract the texture of normal map destá variable. When
+                it
+                has all the
+                normal map textures, it will merge them into an atlas.
+                <br>
+                <br>
+                <b>Property Name To Insert:</b> It is the variable that will store the atlas texture of normal maps, in
+                the
+                final material. For example, at the end of the merge, the Skinned Mesh Combiner will look for the
+                variable
+                "_BumpMap" in the final material and will insert the normal maps atlas in this variable.
+                <!-- #endregion -->
+
+                <!-- #region Tip to avoid differences in positioning of Normal Maps and other Maps in the mesh resulting from the merge -->
+                <div class="title-1" id="11a">
+                    Tip to avoid differences in positioning of Normal Maps and other Maps in the mesh resulting from the
+                    merge
+                </div>
+                If you have textures and normal maps (or other types of maps like occlusion) and are trying to combine
+                using
+                the "All In One" method and your textures have different and varied formats, you can end up with
+                situations
+                where Normap
+                Map for example, looks like be positioned incorrectly. As in the example below.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/26.png" width="600px" />
+                        <br />
+                        Note that after performing the merge, the normal map seemed more "simplified".
+                    </center>
+                </div>
+                This happened because the textures have a lower resolution than the normal map textures. The textures
+                are
+                256x256 while the normal maps are 512x512. So Normal maps end up being positioned only in the center of
+                the
+                texture and there are still some parts of Normal Maps left.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/27.png" width="600px" />
+                        <br />
+                        Due to the fact that Normal Map is larger than the texture itself, it ends up being poorly
+                        positioned over the texture.
+                    </center>
+                </div>
+                The Skinned Mesh Combiner, upon identifying that this may occur, will display this warning to you.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/28.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                To correct this problem simply click on the "Fix all textures where the resolution is different" button.
+                Or if you prefer, do it manually, for
+                that... Leave ALL the textures and maps of your model, in uniform resolutions. In my
+                example model, I fixed this problem by simply resizing all textures, normal maps, occlusion maps and
+                etc. to
+                the uniform size of 512x512. So in the atlas, all textures will be the same size and the positioning
+                will be
+                perfect!
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/29.png" width="600px" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Edges Mip Map Size Tip -->
+                <div class="title-1" id="22a">
+                    Edges Mip Map Size Tip
+                </div>
+                The edges in each texture of an atlas avoid distortions by mip maps, when the camera moves away from the
+                3D
+                model, or remains at certain angles. The larger the border of each texture, the less chance of artifacts
+                appearing. With SMC you have complete
+                freedom to select the size of the borders you want to use in the textures of your atlases, and if you
+                are
+                noticing artifacts in your models, just increase the size of the borders. However, it is important that
+                you
+                never use borders larger than the textures
+                themselves, because, in addition to increasing the time it takes to create the borders, you will also
+                cause
+                the texture to lose A LOT of quality. See below...
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/25.png" width="600" />
+                        <br />
+                        Example
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Monitoring all Resources (Like Meshes/Materials) found by SMC before merging -->
+                <div class="title-1" id="22b">
+                    Monitoring all Resources (Like Meshes/Materials) found by SMC before merging
+                </div>
+                The Skinned Mesh Combiner has an area called "Debugging", available in the "Merge" tab. Debugging shows
+                you
+                all the features that Skinned Mesh Combiner found in your character, and all of these features will be
+                combined, according
+                to the blending method you have chosen. This even makes it easier for you to know ALL the textures that
+                the
+                Skinned Mesh Combiner has found and will match, as well as detected materials and meshes! All features
+                shown
+                in Debugging will
+                be included in the merge, even if you combine in real time, or in the editor. Debugging does not look
+                for
+                resources or meshes in GameObjects marked to be ignored during the merge.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/32.png" width="600" />
+                        <br />
+                        This tab displays all the meshes found. All meshes listed here will be combined. You can also
+                        click
+                        on the buttons to see which GameObject that mesh was found on. You can also see how many
+                        sub-meshes
+                        the mesh has, as well as the amount of vertices.
+                    </center>
+                </div>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/31.png" width="600" />
+                        <br />
+                        This tab displays all the materials found.
+                    </center>
+                </div>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/30.png" width="600" />
+                        <br />
+                        This tab shows all the textures found and if you chose the 'All In one' blending method, all
+                        these
+                        textures will be combined in atlases. You can see the resolution of each, type of compression, a
+                        preview of each, name and etc. The SMC also informs you if the texture is marked as "Read /
+                        Write
+                        Enabled" with the attribute "Readable"!
+                    </center>
+                </div>
+                Some blending methods like "All In One" require that all of your textures are marked with "Read / Write
+                Enabled" in the import settings for each texture. So SMC can read each one, copy its pixels and create
+                atlases with it. If Skinned Mesh Combiner finds one or
+                more textures without this option enabled, it will display a button for you to click and Skinned Mesh
+                Combiner will activate this option quickly and automatically for you! You can also see which textures
+                are
+                readable for SMC, via the "Textures" tab in "Debugging".
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/33.png" width="600" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Defining Which Meshes To Ignore When Merging -->
+                <div class="title-1" id="22c">
+                    Defining Which Meshes To Ignore When Merging
+                </div>
+                It is possible to define which fabrics / GameObjects should be ignored during the merge process. Just
+                add
+                such a GameObject to the list of GameObjects to be ignored. See below.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/38.png" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Merge Events -->
+                <div class="title-1" id="22d">
+                    Merge Events
+                </div>
+                Merge events allow your scripts to dynamically know when your character has had the meshes combined, or
+                a
+                merge has been undone. Just register your methods in one of the events below. Present in the Skinned
+                Mesh
+                Combiner component.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/39.png" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region How to Create Prefabs with SMC! -->
+                <div class="title-1" id="18">
+                    How to Create Prefabs with SMC!
+                </div>
+                To create a prefab automatically after the merge, enable the "Save Prefab Of This" option in the Skinned
+                Mesh Combiner component.
+                <br />
+                <br />
+                <b>This is the recommended way.</b>
+                <br />
+                <br />
+                <b>Step 1</b> - Enable the "Save Data In Assets" option in the Skinned Mesh Combiner component.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/17.png" />
+                        <br />
+                        Presentation of the option. This option will save the merge files to your project files, so you
+                        can
+                        create as many prefabs as you want without worrying about data loss.
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Current limitations of the Skinned Mesh Combiner -->
+                <div class="title-1" id="12">
+                    Current limitations of the Skinned Mesh Combiner
+                </div>
+                The Skinned Mesh Combiner has some limitations. See below for what they are and their explanations.
+                <br />
+                <br />
+                <b>Always ignore meshes that use Blendshapes</b> - Knits that have blendshapes have a more complex
+                weights
+                and calculations for blendshapes to work well. In addition, if you or Animator need to modify the
+                blendshapes at runtime, if the blendshapes meshes were
+                disabled, it would cause visual problems. To avoid bugs and ease the operation of blendshapes, the
+                Skinned
+                Mesh Combiner will always ignore knits that use it.
+                <!-- #endregion -->
+
+                <!-- #region Optimization tips for using Skinned Mesh Combiner -->
+                <div class="title-1" id="14">
+                    Optimization tips for using Skinned Mesh Combiner
+                </div>
+                <b>Avoid combining meshes multiple times in a short time</b>
+                <br />
+                Doing this kind of thing can consume too much memory from the heap, and cause performance losses in your
+                game. If your game has a customization system for example, just combine the meshes when the player
+                finishes
+                customizing.
+                <br />
+                <b>Activate the Unity garbage collection in the Skinned Mesh Combiner settings.</b>
+                <br />
+                Enabling this setting will cause the Skinned Mesh Combiner to clear the memory used by the data that was
+                deleted when you undo the merge. This prevents your heap memory from filling up quickly. Use this option
+                with caution as
+                this can cause in-game freezes depending on how much data to exclude.
+                <br />
+                <b>Combining several characters right at the beginning of the scene.</b>
+                <br />
+                If you need to combine multiple characters (for example, NPCs) early in the game, it may be a bad idea
+                to do
+                this at run time, since too much memory can be consumed or cause freezes in the game. In these cases,
+                give
+                preference to
+                merge through the Editor (Inspector) so that as soon as the scene is executed the characters will
+                already be
+                merged. If you prefer, you can enable the "Save Data In Assets" option. When you enable this option,
+                whenever you merge meshes using
+                the Inspector, data from those meshes will be saved to the files in your project. This makes it even
+                easier
+                to create pre-merged prefabs!
+                <br />
+                <b>One Mesh Per Material or Just Material Colors to combine at runtime</b>
+                <br />
+                The "One Mesh Per Material" and "Just Material Colors" merge method is faster and generates much less
+                garbage besides being almost instantaneous, so it's a great merge method to use while your game runs.
+                Even
+                so, avoid merging many models at the same time,
+                or many so-called merge in a short period of time.
+                <!-- #endregion -->
+
+                <!-- #region Fixing Compile Error "The type or namespace name `Anima2D' could not be found. Are you missing an assembly reference?" -->
+                <div class="title-1" id="23">
+                    Fixing Compile Error "The type or namespace name `Anima2D' could not be found. Are you missing an
+                    assembly reference?"
+                </div>
+                This error occurs when the Anima2D asset scripts and namespace are removed from the project. The Skinned
+                Mesh Combiner can no longer detect the scripts, which causes compilation errors. The Skinned Mesh
+                Combiner
+                has a definition in your project settings, which indicates that there are Anima2D scripts in the
+                project. To
+                correct and eliminate any errors generated by the lack of Anima2D in your project, <b>go to Player
+                    Settings
+                    >
+                    Other Settings and remove the text "MTAssets_Anima2D_Available" from the "Scripting Define Symbols"
+                    field.</b> After removing this setting, the Skinned Mesh Combiner will know that there are no more
+                scripts in the Anima2D tool
+                and no more errors will be generated.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/22.png" />
+                        <br />
+                        This field is available in "Player Settings> Other Settings"
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Fixing Runtime Merge Error "Cannot combine mesh that does not allow access: MeshName..." -->
+                <div class="title-1" id="23aa">
+                    Fixing Runtime Merge Error "Cannot combine mesh that does not allow access: MeshName..."
+                </div>
+                This error appears when you try to combine fabrics at run time, but the fabrics are not marked
+                "Read/Write Enabled" in the import settings. To correct this error, activate the option "Read/Write
+                Enabled" in your meshes and then click "Apply". After that it
+                will be possible to read these meshes and combine them at run time!
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/49.png" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Why isn't my atlas completely filled with my character's textures? -->
+                <div class="title-1" id="23ab">
+                    Why isn't my atlas completely filled with my character's textures?
+                </div>
+                It is not always possible for textures to completely fill the atlas, even if they are perfect squares.
+                Textures must have edges (as if they were tiled) in order to be able to support mipmaps with atlas.
+                These borders increase
+                the size of the textures and often make them no longer perfect squares. Another factor is the varying
+                size of the textures or even the spacing between each texture in the atlas (which can be configured in
+                the Skinned Mesh Combiner).
+                But these are some of the factors that make it not always possible for textures to completely fill the
+                atlas. See an example below.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/50.png" width="650" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Why do the tiled textures look stretched or look strange after merge? -->
+                <div class="title-1" id="23aba">
+                    Why do the tiled textures look stretched or look strange after merge?
+                </div>
+                See below for a good example of a tiled texture that looks stretched or strange after blending.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/52.png" width="650" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                We first need to understand why this happens, and for that, we need to know how the options for blending
+                tiled textures work. Note that this only happens in "All In One" blending mode. Let's talk about the
+                "Merge Tiled Textures" option.
+                <br>
+                <br>
+                <b>Skip All</b> - The Skinned Mesh Combiner will simply skip any meshes that have tiled textures and
+                exclude them from the merge.
+                <br>
+                <br>
+                <b>Legacy Mode</b> - The Skinned Mesh Combiner will map the UV of tiled textures as if they were any
+                other normal textures, this gives the
+                impression that the texture is stretched on the mesh, as it is no longer tiled and in fact stretched to
+                fit across the
+                entire UV of the mesh .
+                <br>
+                <br>
+                <b>Improved Mode</b> - The Skinned Mesh Combiner uses a new algorithm that is capable of supporting
+                tiled textures, even if the UV coordinates
+                of the mesh vertices are negative. The thing here, however, is that the Skinned Mesh Combiner will tile
+                these textures
+                within the final atlas. If a mesh has a very large tile, the texture will be repeated more and more
+                times within the
+                atlas, which will end up generating a low quality when the texture is rendered on the mesh.
+                <br>
+                <br>
+                Look at the image above. Note that in the first part the original shape of the texture is displayed. In
+                the second part
+                the texture seemed stretched because the tiled textures blend mode used was "Legacy Mode". In the third
+                part, the
+                texture seemed strange because the blend mode used was "Improved Mode" and the mesh of the skirt has a
+                huge tile.
+                <br>
+                See below, in the blender, the UV mapping of the character's skirt mesh.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/53.png" width="650" />
+                        <br />
+                        Note that the skirt's UV mapping is much larger than the texture actually is, which generates a
+                        large tiling. So, with
+                        "Improved Mode" the texture has lost a lot of definition. It was repeated over and over again to
+                        the point that there
+                        was not so much room to keep repeating while maintaining the definition of the texture.
+                    </center>
+                </div>
+                Now let's make a comparison, with a tiled mesh, but without a huge UV map, so that it is not repeated
+                over and over
+                again in the final atlas.
+                <br>
+                <br>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/54.png" width="650" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                Note that this time we use the shirt's mesh as an example. The shirt's mesh uses a tiled texture, but
+                the tiling is not
+                large when compared to the tiling of the skirt. In the second part of the image above, the texture again
+                seemed
+                stretched, but this was because the blend mode used was "Legacy Mode". When using "Improved Mode" as
+                shown in the third
+                part of the image, the result is identical to that of the original texture. This is because the texture
+                was also
+                repeated in the atlas, but did not lose its quality, because it is not repeated numerous times.
+                <br>
+                <br>
+                Now let's see the shirt mesh UV map.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/55.png" width="650" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                The UV map of the shirt is large and causes the fabric texture to be repeated several times, but it is
+                not as big as the
+                UV map of the skirt. Therefore, the texture of the fabric was tiled without loss of quality.
+                <br>
+                <br>
+                In summary ... If you need to match your character but he has a HUGE tile, simply register the mesh that
+                has such a
+                large tile, to be ignored. For example, I could register my skirt fabric, to be ignored during merging,
+                to avoid visual
+                problems.
+                <br>
+                <br>
+                If you need to combine tiled meshes, but the tiling is not large (for example, the mesh of this shirt),
+                simply use the
+                "Improved Mode" and everything will be fine.
+                <br>
+                <br>
+                If you need to match a character that doesn't use any tiled texture, simply use "Legacy Mode". Legacy
+                Mode is enabled by
+                default, but Improved Mode is recommended in all of your merges.
+                <br>
+                <br>
+                <b>Tip:</b> Increasing the resolution of the original textures, which will be tiled during merge, can
+                increase
+                the quality
+                of these textures within the atlas after merge.
+                <!-- #endregion -->
+
+                <!-- #region After combining my mesh using Improved Mode, a part of my character has the texture in the wrong place. Why does it happen? -->
+                <div class="title-1" id="23abc">
+                    After combining my mesh using Improved Mode, a part of my character has the texture
+                    in the wrong place. Why does it
+                    happen?
+                </div>
+                This is not common. But there is a minuscule chance of this happening, depending on how your model had
+                the UV mapped. See the example below to understand
+                better.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/56.png" width="650" />
+                        <br />
+                        In the example blend, the UV mapping of the character's eye was in the wrong place. The texture
+                        on the left is the
+                        original texture of the character's eye. The texture on the right is the final atlas generated
+                        after blending. Note that
+                        the texture of the eye in the atlas, had to be partially repeated, because some mesh that also
+                        uses this texture, has a
+                        tiling.
+                    </center>
+                </div>
+                <b>Explaining what happened:</b> There is some sub-mesh of this character, which uses the same material
+                (and
+                consequently the
+                same texture) as the eye. This sub-mesh has a texture tile, which caused the texture to be partially
+                repeated in the
+                atlas, and like the texture of the eye, it is together with that circular and white texture, the texture
+                of the eye
+                ended up being moved too.
+                <br>
+                <br>
+                This was because of the way this character was mapped, perhaps a somewhat incorrect form for merges.
+                Unfortunately, it is not possible to predict that this would happen through an algorithm, so the Skinned
+                Mesh Combiner
+                was unable to apply a correction for this. Everything else in the character model was correctly mapped.
+                The eye was only mapped incorrectly because it was in a
+                texture that needed to be repeated, thus, shifting its position and leaving the position to which it
+                should be.
+                <br>
+                <br>
+                To correct this, first, we can simply use a program like Blender, to separate the vertices of our
+                character's eye, as in
+                the figure ...
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/57.png" width="650" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/58.png" width="650" />
+                        <br />
+                        Don't worry, the Skinned Mesh Combiner will combine all of these fabrics into one.
+                    </center>
+                </div>
+                Now that the vertices of the eye have been separated into a completely new mesh, we just need to create
+                a new material
+                within Unity, and associate the texture of the eye with this material. Then add the new material, the
+                mesh that was
+                separated. As shown above.
+                <br>
+                <br>
+                Now that we have done this, there is no other mesh that will use this same material and texture, so the
+                texture of the
+                eye will not be repeated, moving the pixels of the eye. Therefore, the Skinned Mesh Combiner will not
+                repeat the texture
+                of the eye and this mesh of the eye will have its own texture within the atlas.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/59.png" width="650" />
+                        <br />
+                        This is the result. The eye mesh has now been mapped correctly. All meshes were combined, meshes
+                        using tiled texture, had their tiles generated in the atlas, without problems (with
+                        Improved Mode) and the eye mesh has its own texture and material, which ended the mapping
+                        problem.
+                    </center>
+                </div>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/60.png" width="650" />
+                        <br />
+                        This is the atlas generated after merging the character with the fixed problem. The texture
+                        marked with a red line, is
+                        the duplicated and exclusive texture for the mesh of the eye to which we separate. It was not
+                        tiled, as the mesh we
+                        separated for the eye, does not use tiled textures, so the Skinned Mesh Combiner did not attempt
+                        to repeat such texture.
+                    </center>
+                </div>
+                This process is only useful when you combine meshes using Improved Mode to combine tiled textures and
+                the All In One
+                blending method. This is not a frequent occurrence, but it is always good for you to be aware and
+                understand why it
+                happens! In this case, to summarize again, this only happened because they had two parts of the model,
+                which were using
+                the same texture. A part of the model was using the white circular content of the texture, and that part
+                of the model
+                was tiling the texture, which caused the pixels of the eyes in the texture to be moved from their
+                original location. By
+                separating the vertices of the character's eye and creating a new texture just for this separate mesh,
+                we solved the
+                problem.
+                <br>
+                <br>
+                That is all!
+                <!-- #endregion -->
+
+                <!-- #region Warning before using SMC with HDRP, URP or different standard shaders -->
+                <div class="title-1" id="23ac">
+                    Warning before using SMC with HDRP, URP or different standard shaders
+                </div>
+                URP and HDRP (rendering pipelines) have new default property names in the shaders. For example, in the
+                embedded pipeline (Unity default) the default name of the property that stores your character's textures
+                is "_MainTex", however,
+                in HDRP and URP this default name has been changed to "_BaseMap". Therefore, if you use HDRP, URP
+                shaders or different shaders (created by third parties for example), you can change the properties where
+                the SMC seeks the textures. To do this,
+                deselect the option "Default Main Tex. Prop.", Doing so the Skinned Mesh Combiner will allow you to
+                change the default properties where the textures will be searched and applied.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/51.png" />
+                        <br />
+                        Representation
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region About This Component: Skinned Meshes Bones Manager -->
+                <div class="title-1" id="23a">
+                    About This Component: Skinned Meshes Bones Manager
+                </div>
+                Sometimes we need to debug our 3D character models, for example, we need to see which vertices are
+                controlled by each of our character's bones. Sometimes we need to see all the bones that are part of our
+                character's bone hierarchy, and consequently
+                which are the bones (Transform) that move and animate our character. When creating a character
+                customization system, where each outfit is saved with a different FBX file, we need to make the clothes
+                animated using the character's bone hierarchy of bones,
+                to ensure perfect animations. The "Skinned Mesh Bones Manager" component provided by the Skinned Mesh
+                Renderer can help you with all of this, both in the Editor and at run time. Keep reading to understand
+                more about everything!
+                <!-- #endregion -->
+
+                <!-- #region Visualizing The Hierarchy of Bones That Animates a Mesh -->
+                <div class="title-1" id="23b">
+                    Visualizing The Hierarchy of Bones That Animates a Mesh
+                </div>
+                The Skinned Meshes Bones Manager allows you to see the entire bone hierarchy that currently animates and
+                deforms the mesh it is in now. You can see the name of all the bones, the index of each one and other
+                data.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/40.png" />
+                        <br />
+                        The component. The "Shirt" mesh is influenced by a bone hierarchy that contains a total of 18
+                        bones.
+                    </center>
+                </div>
+                By clicking on the "Shirt" mesh that has the Skinned Meshes Bones Manager component, we can see the "All
+                Bones Of This Mesh (Shirt)" list, which displays the entire hierarchy of bones (Transforms) that control
+                and deform the mesh.
+                We can see the name of each bone, the amount of vertices that each bone deforms, in addition to the
+                index pertaining to each bone, in the bone hierarchy. It is also possible to click on "Path" so that the
+                component displays where the respective bone is, in the scene.
+                <!-- #endregion -->
+
+                <!-- #region Visualizing All Vertices Influenceds By a Bone -->
+                <div class="title-1" id="23c">
+                    Visualizing All Vertices Influenceds By a Bone
+                </div>
+                By clicking on the "Vertices" button for a given bone, Skinned Meshes Bones Manager will display an
+                interface on the scene, that interface will display points where each vertex controlled by the
+                respective bone is. The color of the point indicates how much weight
+                the bone exerts at that vertex. The greener the vertex is, the smaller the weight, the redder the
+                vertex, the greater the weight. When you click on a point (vertex), more details are displayed.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/41.png" width="650" />
+                        <br />
+                        In the image above, the "ColumnU" bone of the "Shirt" mesh was selected. The editor reported
+                        that this bone influences 619 vertices and renders all vertices influenced by the bone. Thus,
+                        you know where and at what points this bone controls the "Shirt" mesh. It's great for debugging!
+                        There are still more bones influencing different points of the "Shirt" mesh, which can be seen
+                        in the component.
+                        <br>
+                        <br>
+                        The component only displays the influenced vertices, of the mesh to which it is located. That
+                        is, it shows all the bones in the bone hierarchy that animates the "Shirt" mesh, but only shows
+                        the influenced vertices of the "Shirt" mesh. If you want to see the influenced vertices,
+                        from the "Backhair" mesh for example, you need to add the "Skinned Mesh Bones Manager" component
+                        to the "Backhair" mesh, and the component will display which vertices of the "Backhair" mesh are
+                        affected by the different bones.
+                    </center>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Making a Mesh Use The Bone Hierarchy of Another Mesh, To Be Animated. Customizable Character, Several FBX Files, One For Each Outfit. -->
+                <div class="title-1" id="23d">
+                    Making a Mesh Use The Bone Hierarchy of Another Mesh, To Be Animated. Customizable Character,
+                    Several FBX Files, One For Each Outfit.
+                </div>
+                You may have already come across a character customization system. Typically, many games use multiple
+                FBX files, a different file for each mesh. In the following example character, the head is the main
+                mesh, has its hierarchy of
+                bones and the clothes must be attached to it to form the body.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/42.png" width="650" />
+                        <br />
+                        It seems that the character has all the meshes together, but it doesn't. Each character's outfit
+                        is a different mesh, a different FBX file.
+                    </center>
+                </div>
+                However, note that when I move the bones of the head bone hierarchy, the rest of the body does not move,
+                even if I move bones in the spine, arm, etc. This is because each mesh (clothing) of the character,
+                still has its own
+                hierarchy of bones, and if I want to make the animations of the shirt for example, I need to move the
+                bones of the shirt, not move the bones of the head. <b>We are going to use the Skinned Mesh Bones
+                    Manager to make all the clothes come alive using the
+                    head bone hierarchy, so when we move any bone from the head bone hierarchy, the clothes will also be
+                    deformed.</b> Keep reading to learn more!
+                <div class="video">
+                    <center>
+                        <iframe width="80%" height="310px" class="tscplayer_inline" id="embeddedSmartPlayerInstance"
+                            src="Files/Videos/43/PlayerLocal.html?embedIFrameId=embeddedSmartPlayerInstance"
+                            scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen
+                            allowFullScreen></iframe>
+                    </center>
+                    <br />
+                    Demonstration.
+                </div>
+                First, in order for it to be possible for a mesh to be animated using the bone hierarchy of another
+                mesh, both must have a hierarchy of identical bones. See the example below, where I show the hierarchy
+                of bones of the head, and the shirt.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/44.png" width="650" />
+                        <br />
+                        The two meshes have an IDENTICAL bone hierarchy, with the same names, bones in the same indices,
+                        etc. To make this possible, when creating my model, I did the following: I created your body,
+                        created and placed the bone hierarchy and assigns the weights making the bone
+                        hierarchy animate my character's body. So, I created 5 copies of my character's body. In the
+                        first copy, I deleted all the vertices of my character's body, leaving only the head. In the
+                        second copy I deleted all the vertices of my character, leaving only the vertices
+                        pertaining to the shirt, and so on for the remaining 3 copies. In the end, the head, shirt,
+                        pants, hair and shoes were left. All using the same bone hierarchy.
+                        <br>
+                        <br>
+                        All bones in the bone hierarchy must remain there, in all meshes, even if not all bones are
+                        used. For example, in the head, the leg bones, arms, etc. still remain in the hierarchy, but
+                        they do not move anything, only the bones of the neck and head make the
+                        movement of the head. In the T-shirt, the bones of the legs, head and etc. are still there, but
+                        only the bones of the spine, arms and etc. can animate the head.
+                    </center>
+                </div>
+                Just to make things clearer for you, in case you still have doubts: Going to Blender, see the head mesh
+                and the shirt mesh, and their respective bone hierarchy.
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/46.png" width="650" />
+                        <br />
+                        This is the mesh of the head and its hierarchy of bones, in Blender.
+                    </center>
+                </div>
+                <div class="image">
+                    <center>
+                        <img src="Files/Images/45.png" width="650" />
+                        <br />
+                        This is the mesh of the Shirt and its hierarchy of bones, in Blender. Note that the two are
+                        identical.
+                    </center>
+                </div>
+                Now, at Unity, we are going to make the "Shirt" mesh use the same bone hierarchy as the "Head" mesh,
+                using the Skinned Mesh Bones Manager component. See below. Realize that right after the "Shirt" mesh
+                starts using the "Head" mesh hierarchy, the "Shirt" already begins to be animated by the bones of the
+                "Head" bone hierarchy.
+                <div class="video">
+                    <center>
+                        <iframe width="80%" height="310px" class="tscplayer_inline" id="embeddedSmartPlayerInstance"
+                            src="Files/Videos/47/PlayerLocal.html?embedIFrameId=embeddedSmartPlayerInstance"
+                            scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen
+                            allowFullScreen></iframe>
+                    </center>
+                    <br />
+                    To do this, I went to the "Skinned Mesh Bones Manager" present in the "Shirt" mesh and then dragged
+                    the Skinned Mesh Renderer from the "Head" mesh to the "Bones Hierarchy To Use" field. And then, I
+                    just clicked "Use Bones Hierarchy From That Skinned Mesh Renderer".
+                </div>
+                Now let's repeat the process for all of our character's meshes, so all meshes will be animated by the
+                bone hierarchy of our character's head.
+                <br>
+                <br>
+                It is important to note that: The Skinned Mesh Bones Manager will only allow the use of another bone
+                hierarchy, if the other bone hierarchy is identical to the bone hierarchy of the current mesh.
+                <div class="video">
+                    <center>
+                        <iframe width="80%" height="310px" class="tscplayer_inline" id="embeddedSmartPlayerInstance"
+                            src="Files/Videos/48/PlayerLocal.html?embedIFrameId=embeddedSmartPlayerInstance"
+                            scrolling="no" frameborder="0" webkitAllowFullScreen mozallowfullscreen
+                            allowFullScreen></iframe>
+                    </center>
+                    <br />
+                    Now our entire character is animated by the hierarchy of bones in the head.
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Runtime API Of This Component -->
+                <div class="title-1" id="23e">
+                    Runtime API Of This Component
+                </div>
+                The "Skinned Mesh Bones Manager" component has a method for you to define which bone hierarchy your mesh
+                should use, even at run time.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshRenderer anotherMeshRendererToUseBones;
+    
+    public SkinnedMeshBonesManager meshBonesManager;
+    
+    void Start () {
+        //Use bones hierarchy of another skinned mesh renderer
+        meshBonesManager.UseAnotherBoneHierarchyForAnimateThis(anotherMeshRendererToUseBones, true);
+    }
+}
+</code></pre>
+                    <center>SkinnedMeshBonesManager.UseAnotherBoneHierarchyForAnimateThis() - Parameters</center>
+                    <br />
+                    <table style="font-size: 13px;">
+                        <tr>
+                            <th width="100px">Variable</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>meshRendererBonesToUse</td>
+                            <td>A Skinned Mesh Renderer mesh that provides the bone hierarchy to be used by the mesh the
+                                Skinned Mesh Bones Manager is in.</td>
+                        </tr>
+                        <tr>
+                            <td>useRootBoneToo</td>
+                            <td>If true, Skinned Mesh Bones Manager will also copy the root bone of the provided mesh.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Demo Scene -->
+                <div class="title-1" id="15">
+                    Demo Scene
+                </div>
+                You can enter the demo scene "DemoScene (Example of Merge)" to see how the Skinned Mesh Combiner works
+                closely! See right now and study the documentation, so you'll fully understand the merge process. The
+                scene
+                has two models,
+                each model uses a blending method, you can operate the Skinned Mesh Combiner components of each to
+                learn!
+                You can combine the models, both in the editor and at run time to see how it all works!
+                <!-- #endregion -->
+
+                <!-- #region Combining Meshes -->
+                <div class="title-1" id="15a">
+                    Combining Meshes
+                </div>
+                Assuming that you have already seen the topic on combining runtime meshes above, here you will see only
+                the documentation for this method. You also need to have configured all the Skinned Mesh Renderer
+                options, which you deem necessary,
+                before calling this method. After combining the meshes, it is not possible to combine them again. If you
+                want to combine them again, you will need to undo the merge with the method shown in the next topic.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Combine all meshes of this character
+        meshCombiner.CombineMeshes();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Undo merge -->
+                <div class="title-1" id="15b">
+                    Undo merge
+                </div>
+                To unmerge and be able to combine meshes again, call the method below.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Undo the merge, and restore all original meshes
+        meshCombiner.UndoCombineMeshes(true, true);
+    }
+}
+</code></pre>
+                    <center>SkinnedMeshCombiner.UndoCombineMeshes() - Parameters</center>
+                    <br />
+                    <table style="font-size: 13px;">
+                        <tr>
+                            <th width="100px">Variable</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>runUnityGc</td>
+                            <td>If true, after undoing the merge, Skinned Mesh Render will run Unity Resources Garbage
+                                Collector.</td>
+                        </tr>
+                        <tr>
+                            <td>runMonoIl2CppGc</td>
+                            <td>If true, after undoing the merge, Skinned Mesh Render will run Mono/IL2CPP Garbage
+                                Collector.</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Checking if meshes are merged -->
+                <div class="title-1" id="15c">
+                    Checking if meshes are merged
+                </div>
+                To find out if the meshes are merged, call the method below.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Is meshes merged?
+        bool meshesMerged = meshCombiner.isMeshesCombined();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Getting the mesh resulting from the merge -->
+                <div class="title-1" id="15d">
+                    Getting the mesh resulting from the merge
+                </div>
+                If the meshes are combined, the Skinned Mesh Combiner can return you to the mesh resulting from the
+                merge! To do this, call the method below. If the meshes are not combined by the time you call this
+                method, the Skinned Mesh Combiner will combine
+                them for you, and then return the mesh resulting from the merge.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //The mesh result of merge
+        SkinnedMeshRenderer result = meshCombiner.GetCombinedMeshSkinnedMeshRenderer();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Converting the combined mesh to a static mesh -->
+                <div class="title-1" id="15e">
+                    Converting the combined mesh to a static mesh
+                </div>
+                If the meshes are combined, it is possible to convert the mesh resulting from the merge, into a static
+                mesh. That is, it will cease to be a Skinned mesh and become a common mesh (Mesh Renderer + Mesh
+                Filter).
+                The common mesh will have the vertices at the position of the vertices of the Skinned mesh, the moment
+                this method is called. After converting the Skinned mesh to static, the Skinned mesh will no longer be
+                rendered, only its static version.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Convert the mesh result of merge, to static
+        meshCombiner.ConvertCombinedMeshToStaticMesh();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Undoing the combined mesh to static mesh -->
+                <div class="title-1" id="15f">
+                    Undoing the combined mesh to static mesh
+                </div>
+                To undo the conversion to static mesh and restore the Skinned mesh, call the method below.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Undo covnversion to static mesh
+        meshCombiner.UndoConvertCombinedMeshToStaticMesh();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Verifying that the mesh resulting from the merge has been converted to static -->
+                <div class="title-1" id="15g">
+                    Verifying that the mesh resulting from the merge has been converted to static
+                </div>
+                To find out if the mesh resulting from the merge is currently converted to a static mesh, call the
+                method below.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Is the mesh resulting of merge is converted to static?
+        bool isConverted = meshCombiner.isCombiendMeshesConvertedToStatic();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Getting the mesh converted to static -->
+                <div class="title-1" id="15h">
+                    Getting the mesh converted to static
+                </div>
+                If the mesh resulting from the merge is converted to a static mesh, the Skinned Mesh Renderer can return
+                the GameObject that is storing the static mesh. To do this, call the method below. If your character's
+                meshes are not combined, or are not converted to static
+                meshes, this method will return null.
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+using UnityEngine;
+using MTAssets.SkinnedMeshCombiner;
+    
+public class Test : MonoBehaviour {
+    
+    public SkinnedMeshCombiner meshCombiner;
+    
+    void Start () {
+        //Get the GameObject that stores the static mesh
+        GameObject staticMesh = meshCombiner.GetCombinedMeshConvertedToStatic();
+    }
+}
+</code></pre>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Settings e Options Of Component -->
+                <div class="title-1" id="16">
+                    Settings e Options Of Component
+                </div>
+                The Skinned Mesh Combiner has some options and settings that you can use in merge methods. Each setup
+                can
+                help you even more during merge! In addition, you can also change each one at run time.
+                <br />
+                <br />
+                See for example, when you change the merge method at run time
+                <div class="script">
+                    <center>Script C#<br /><br /></center>
+                    <pre><code class="language-csharp">
+void Start()
+{
+    SkinnedMeshCombiner combiner = GetComponent&ltSkinnedMeshCombiner&gt();
+    combiner.mergeMethod = SkinnedMeshCombiner.MergeMethod.AllInOne;
+}
+</code></pre>
+                </div>
+                Now see a table that contains all the settings, explanations and their corresponding variables, which
+                can be
+                changed in real time.
+                <br />
+                <br />
+                <table>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Variable</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Combine Method</td>
+                        <td>mergeMethod</td>
+                        <td>Changes the combine method of the Skinned Mesh Combiner component. (Keep reading to view all
+                            parameters of each merge method!)</td>
+                    </tr>
+                    <tr>
+                        <td>Compatibility Mode</td>
+                        <td>compatibilityMode</td>
+                        <td>Changes the compatibility mode for remapping the mesh bone weights. It should normally be
+                            activated.</td>
+                    </tr>
+                    <tr>
+                        <td>Combine Inactives</td>
+                        <td>combineInactives</td>
+                        <td>If you enable this option, Skinned Mesh Combiner will include ALL meshes in the merge, even
+                            meshes that are disabled.</td>
+                    </tr>
+                    <tr>
+                        <td>Combine On Start</td>
+                        <td>combineOnStart</td>
+                        <td>Activate this option and the Skinned Mesh Combiner will start the merge automatically, as
+                            soon
+                            as the game starts. The existing parameters that will be used during the merge, so be sure
+                            to
+                            leave the SMC already configured, before starting the game.</td>
+                    </tr>
+                    <tr>
+                        <td>Convert To Static Mesh</td>
+                        <td>convertCombinedMeshToStaticOnStart</td>
+                        <td>Leave this option enabled and after performing the merge when starting the game, SMC will
+                            still
+                            transform the mesh resulting from the merge, into a static mesh. For this option to be
+                            available, "Combine On Start" must be enabled.</td>
+                    </tr>
+                    <tr>
+                        <td>Ignore Blendshapes</td>
+                        <td>ignoreBlendshapes</td>
+                        <td>If this option is enabled, Skinned Mesh Combiner will ignore any meshes that have
+                            Blendshapes.
+                            Useful if you want to keep full control of your Blendshapes, and still combine your meshes.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name Of This Merge</td>
+                        <td>nameOfThisMerge</td>
+                        <td>The name that will be given to the GameObject resulting from the merge (and that stores the
+                            combined mesh). Useful if you need to generate several merges within just one character, if
+                            you
+                            want to make LODs for example.</td>
+                    </tr>
+                    <tr>
+                        <td>GameObjects To Ignore During Merge</td>
+                        <td>gameObjectsToIgnore</td>
+                        <td>A list of GameObjects to be ignored by SMC when merging. Add a GameObject to this list and
+                            it
+                            will simply be ignored during the merge!</td>
+                    </tr>
+                    <tr>
+                        <td>On Combine Meshes (Event)</td>
+                        <td>onCombineMeshs</td>
+                        <td>This event will call all registered methods after a merge is complete.</td>
+                    </tr>
+                    <tr>
+                        <td>On Undo Combine Meshes (Event)</td>
+                        <td>onUndoCombineMeshs</td>
+                        <td>This event will call all registered methods after a merge is undone.</td>
+                    </tr>
+                    <tr>
+                        <td>Show Logs In Console</td>
+                        <td>launchConsoleLogs</td>
+                        <td>Enable this option and SMC will also send logs to the Unity console if it needs to
+                            communicate
+                            with you, or needs to report errors or warnings.</td>
+                    </tr>
+                    <tr>
+                        <td>Highlight UV Vertices</td>
+                        <td>highlightUvVertices</td>
+                        <td>Activate this option and the SMC will place yellow pixels in the atlas, where each vertex of
+                            the
+                            UV map is located.</td>
+                    </tr>
+                    <tr>
+                        <td>Save Data In Assets</td>
+                        <td>saveDataInAssets</td>
+                        <td>If this option is active, SMC will save the mesh files, textures and etc., generated during
+                            the
+                            merging. The files will be saved to your project.<br><br>
+                            Note: Files are only saved if they are merged using the Editor.</td>
+                    </tr>
+                    <tr>
+                        <td>Save Prefab Of Merge</td>
+                        <td>savePrefabOfMerge</td>
+                        <td>If this option is active, SMC will save a merge prefab to your project.<br><br>
+                            Note: Prefab are only saved if they are merged using the Editor.</td>
+                    </tr>
+                    <tr>
+                        <td>Prefab Name</td>
+                        <td>nameOfPrefabOfMerge</td>
+                        <td>The name that will be given to the saved prefab.<br><br>
+                            Note: Prefab are only saved if they are merged using the Editor.</td>
+                    </tr>
+                </table>
+                <br>
+                - Parameters Of One Mesh Per Material merge method
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Variable</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Only Eq. Root Bones</td>
+                        <td>oneMeshPerMaterialParams.mergeOnlyEqualRootBones</td>
+                        <td>Activate this and the Skinned Mesh Combiner will stop the merge if it finds any mesh that
+                            has
+                            root bones different from the other meshes. This is not always necessary, but it is a
+                            security
+                            mechanism to avoid possible merge problems. You can always disable this option if you
+                            prefer!
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                - Parameters Of All In One merge method
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Variable</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Only Eq. Root Bones</td>
+                        <td>allInOneParams.mergeOnlyEqualRootBones</td>
+                        <td>Activate this and the Skinned Mesh Combiner will stop the merge if it finds any mesh that
+                            has
+                            root bones different from the other meshes. This is not always necessary, but it is a
+                            security
+                            mechanism to avoid possible merge problems. You can always disable this option if you
+                            prefer!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Material To Use</td>
+                        <td>allInOneParams.materialToUse</td>
+                        <td>This parameter is mandatory. After merging, Skinned Mesh Combiner will use the material you
+                            provide to create a copy and apply it to the combined mesh. This material will store the
+                            Atlas
+                            generated during the merge and will also have its properties copied from the material you
+                            provide (Except textures).</td>
+                    </tr>
+                    <tr>
+                        <td>Atlas Max Resolution</td>
+                        <td>allInOneParams.atlasResolution</td>
+                        <td>The maximum resolution that the atlas generated during the merge can have.</td>
+                    </tr>
+                    <tr>
+                        <td>Atlas Padding</td>
+                        <td>allInOneParams.atlasPadding</td>
+                        <td>The space between each texture in the atlas.</td>
+                    </tr>
+                    <tr>
+                        <td>Mip Map Edges Size</td>
+                        <td>allInOneParams.mipMapEdgesSize</td>
+                        <td>The size of the edges that each texture will have. The larger the border, the less likely
+                            that a
+                            texture will appear invisible when the camera is further away, but the quality of the
+                            texture is
+                            reduced if the atlas is small.</td>
+                    </tr>
+                    <tr>
+                        <td>Merge Tiled Textures</td>
+                        <td>allInOneParams.mergeTiledTextures</td>
+                        <td>Some textures have a higher UV than the texture itself (tiled textures). That is, the
+                            texture is repeated when
+                            rendered in the model. During blending, repeating a texture can cause several problems
+                            related
+                            to how the texture will be displayed in the atlas, so the SMC reduces its UV to fit the
+                            original
+                            texture, eliminating the texture repetition effect. You can choose 1 of 3 methods of
+                            blending tiled textures.</td>
+                    </tr>
+                    <tr>
+                        <td>Default Main Tex. Prop.</td>
+                        <td>allInOneParams.useDefaultMainTextureProperty</td>
+                        <td>
+                            If the textures of the materials of the character you want to combine, are stored in the
+                            "_MainTex" property, leave this option enabled. Otherwise, disable this option to show the
+                            SMC,
+                            in which properties to look for textures.<br><br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.mainTexturePropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.mainTexturePropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Metallic Map Support</td>
+                        <td>allInOneParams.metallicMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Metallic Map" effect, then SMC will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.metallicMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.metallicMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Spec. Map Support</td>
+                        <td>allInOneParams.specularMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Specular Map" effect, then SMC will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.specularMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.specularMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Normal Map Support</td>
+                        <td>allInOneParams.normalMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Normal Map" effect, then SMC will
+                            combine
+                            all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.normalMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.normalMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Normal Map 2 Support</td>
+                        <td>allInOneParams.normalMap2Support</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Detail Normal Map" effect, then SMC
+                            will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.normalMap2PropertyFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.normalMap2PropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Height Map Support</td>
+                        <td>allInOneParams.heightMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Height Map" effect, then SMC will
+                            combine
+                            all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.heightMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.heightMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Occlus. Map Support</td>
+                        <td>allInOneParams.occlusionMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Occlusion Map" effect, then SMC will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.occlusionMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.occlusionMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Detail Map Support</td>
+                        <td>allInOneParams.detailAlbedoMapSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Detail Albedo Map" effect, then SMC
+                            will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.detailMapPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.detailMapPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Detail Mask Support</td>
+                        <td>allInOneParams.detailMaskSupport</td>
+                        <td>
+                            <br>Activate this option to activate support for the "Detail Mask Map" effect, then SMC will
+                            combine all the maps found and create an atlas of this effect.<br>
+                            Variable that stores the name of the property where the SMC will look for textures/maps:
+                            <b>allInOneParams.detailMaskPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            textures/maps combined: <b>allInOneParams.detailMaskPropertyToInsert</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pink Normal Maps Fix</td>
+                        <td>allInOneParams.pinkNormalMapsFix</td>
+                        <td>Sometimes, when generating atlases from normal maps, for reasons of compacting textures, the
+                            atlas may come out in a pink / orange tone. If this happens, activate this option and the
+                            Skinned Mesh Combiner will execute an algorithm to detect and prevent this from happening!
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                - Parameters Of Just Material Colors merge method
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Variable</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Only Eq. Root Bones</td>
+                        <td>justMaterialColorsParams.mergeOnlyEqualRootBones</td>
+                        <td>Activate this and the Skinned Mesh Combiner will stop the merge if it finds any mesh that
+                            has
+                            root bones different from the other meshes. This is not always necessary, but it is a
+                            security
+                            mechanism to avoid possible merge problems. You can always disable this option if you
+                            prefer!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Material To Use</td>
+                        <td>justMaterialColorsParams.materialToUse</td>
+                        <td>This parameter is mandatory. After merging, Skinned Mesh Combiner will use the material you
+                            provide to create a copy and apply it to the combined mesh. This material will store the
+                            Atlas
+                            generated during the merge and will also have its properties copied from the material you
+                            provide (Except textures).</td>
+                    </tr>
+                    <tr>
+                        <td>Default Color Property</td>
+                        <td>justMaterialColorsParams.useDefaultColorProperty</td>
+                        <td>
+                            <br>If the colors of your materials are not stored in the "_Color" property, disable this
+                            option
+                            so that you can define yourself, where the SMC should look for colors.<br>
+                            Variable that stores the name of the property where the SMC will look for colors:
+                            <b>justMaterialColorsParams.colorPropertyToFind</b><br><br>
+                            Variable that stores the name of the property where the SMC will apply the atlas of all
+                            colors
+                            combined: <b>justMaterialColorsParams.mainTexturePropertyToInsert</b>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                - Parameters Of Only Anima2D Meshes merge method
+                <br>
+                <br>
+                <table>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Variable</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Atlas Max Resolution</td>
+                        <td>onlyAnima2dMeshes.atlasResolution</td>
+                        <td>The maximum resolution that the atlas generated during the merge can have.</td>
+                    </tr>
+                </table>
+                <br>
+                <!-- #endregion -->
+
+                <!-- #region Contact and Support -->
+                <div class="title-1" id="17">
+                    Contact and Support
+                </div>
+                Congratulations, you have reached the end of the documentation! Thanks for reading. If you need to
+                contact
+                me for any difficulty, feature suggestion, bug fix, question or support, just contact me through my
+                email
+                below!
+                <br>
+                <br />
+                <center>
+                    <font style="font-size: 18px; color: #00771d;">mtassets@windsoft.xyz</font>
+                </center>
+                <!-- #endregion -->
+
+                <div class="footer">
+                    <center>
+                        <hr />
+                        <br />
+                        <br />
+                        <small>
+                            On-line links
+                            <br />
+                            <br />
+                            <a href="https://www.youtube.com/channel/UCqAgiYBwAWajjFUqyJ6_xyw?view_as=subscriber"
+                                target="_blank">Youtube Channel</a>
+                            •
+                            <a href="https://assetstore.unity.com/publishers/40306" target="_blank">MT Assets</a>
+                            •
+                            <a href="https://windsoft.xyz/ForBrowsers/MTAssets/Home.php" target="_blank">Site</a>
+                        </small>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a68db8868a8dd4a909a79d8d6fe0aa, type: 3}
+  m_Name: English
+  m_EditorClassIdentifier: 
+  languagePrefix: en
+  languageIcon: {fileID: 21300000, guid: 36d364de221941d4284824e13d70b4b8, type: 3}
+  yes: YES
+  no: NO
+  _continue: CONTINUE
+  close: CLOSE
+  end: END
+  back: BACK
+  main_menu_header: MATHEMATICS ISLAND
+  main_menu_resume_game: RESUME GAME
+  main_menu_start_game: START GAME
+  main_menu_settings: SETTINGS
+  main_menu_credits: CREDITS
+  main_menu_reset: RESET
+  main_menu_exit: EXIT
+  main_menu_are_you_sure_to_reset: All of your saves will be deleted. Are you sure?
+  settings_menu_master_volume: MASTER VOLUME
+  settings_menu_music_volume: MUSIC VOLUME
+  settings_graphics_quality: GRAPHICS QUALITY
+  settings_quality_level_1: LOW
+  settings_quality_level_2: MEDIUM
+  settings_quality_level_3: HIGH
+  settings_quality_level_4: ULTRA
+  in_game_menu_gold: VAULT
+  in_game_menu_go_fishing: GO FISHING
+  in_game_menu_closest_market: CLOSEST SHOP
+  in_game_menu_inventory: INVENTORY
+  in_game_menu_stop: STOP!
+  timeout_text: YOU HAVE RAN OUT OF TIME :(
+  credits_designer: DESIGN
+  credits_graphics: GRAPHICS
+  credits_programming: PROGRAMMING
+  credits_ui: MENUS/UI
+  credits_testing: TESTING
+  fishing_rod_broken: YOUR ROD IS BROKEN!
+  fishing_correct_answer: CONGRATULATIONS! <br> CORRECT ANSWER!
+  fishing_wrong_answer: UNFORTUNAELTY <br> WRONG ANSWER!
+  fishing_caught_fish: YOU HAVE CAUGHT {0} {1}!
+  fishing_you_need_rod: YOU NEED A ROD BEFORE FISHING!
+  shop_buy: BUY
+  shop_sell_equipment: SELL EQUIPMENT
+  shop_sell_fish: SELL FISH
+  shop_not_enough_money: YOU DONT HAVE ENOUGH MONEY
+  shop_sell_item_one: SELL
+  shop_sell_item_all: SELL ALL
+  shop_preview_item: PREVIEW
+  shop_stop_preview: STOP
+  shop_you_have_bought: You have bought a {0}
+  inventory_view_equipment: SHOW EQUIPMENT
+  inventory_view_fish: SHOW FISHES
+  inventory_wear: WEAR
+  inventory_take_off: TAKE OFF
+  question_ask_result_of_equation: Please answer following question;
+  tutorial_main_welcome: Welcome to Mathematics Island! It's all mathematics here!
+  tutorial_main_ask_for_name: Can you give me your name?
+  tutorial_main_ask_for_name_placeholder: Click here to type your name!
+  tutorial_main_shops_and_fishing: You can catch fishes using your mathematics knowledge
+    here! And make money selling those fishes!
+  tutorial_main_items_to_buy: You can buy various stuff from shops around the island,
+    using the money you made from  fishing!
+  tutorial_main_to_fish: You will need a rod to catch your first fish! Check out
+    the shops to get one!
+  tutorial_main_to_buy: Click on a shop to talk to shopkeeper!
+  tutorial_shop_welcome: Welcome to the market!
+  tutorial_shop_can_buy_equipment: You can buy yourself clothes and equipment here.
+  tutorial_shop_can_overview_equipment: Drag your character horizontally, to better
+    see your items.
+  tutorial_shop_buy_tutorial: Tap on an item's icon to purchase it.
+  tutorial_shop_sell_tutorial: Don't forget that better rods has more durability
+    and has better chance to catch multiple fish at once!
+  tutorial_shop_final: It's a good idea to buy a "Terrible Rod", to catch your first
+    fish!
+  tutorial_fish_welcome: Now you are ready to fish!
+  tutorial_fish_how_to: You need to choose the correct answer to catch a fish.
+  tutorial_fish_consequenses: But you need to be careful! There are a lot of hungry
+    fish in the sea!
+  tutorial_fish_consequenses_deep1: 'If you; <br> -Fail to answer a question, <br>
+    Can''t answer int time, <br> or Stop fishing while question is up; <br> Your
+    rod will wear off and may break! '
+  tutorial_fish_consequenses_deep2: You need to buy another rod if yours is broken.
+  tutorial_fish_fish_final: Good luck!
+  tutorial_common_click_to_continue: (Click to Continue)
+  tutorial_common_click_to_start_game: (Click to Start Game)
+  tutorial_common_click_to_end: (Click to Finish)
+  tip_natural_numbers_addition: Adding two natural numbers... I had 2 apples, then
+    i bought 3 more, now I have 5 apples!
+  tip_natural_numbers_substraction: Substraction two natural numbers... I had 5 apples,
+    then i ate 2, now I have 3 apples!
+  tip_natural_numbers_multiplication: Multiplying two natural numbers... It's easy
+    if you know the multiplication table!
+  tip_natural_numbers_division: Dividing two natural numbers.. It's easy if you know
+    the multiplication table!
+  tip_fractions_addition: Equalizing the denominators is a good idea when adding
+    two fractional numbers!
+  tip_fractions_substraction: Equalizing the denominators is a good idea when substracting
+    two fractional numbers!
+  tip_fractions_multiplication: You can multiply numerators and denominators separately
+    when multiplying fractional numbers!
+  tip_fractions_division: You can invert one of the numbers and do a multiplication
+    when dividing fractional numbers!
