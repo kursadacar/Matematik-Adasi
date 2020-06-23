@@ -36,7 +36,6 @@ MonoBehaviour:
   settings_quality_level_2: ORTA
   settings_quality_level_3: "Y\xDCKSEK"
   settings_quality_level_4: ULTRA
-  in_game_menu_gold: KASA
   in_game_menu_go_fishing: BALIK TUT
   in_game_menu_closest_market: EN YAKIN MARKET
   in_game_menu_inventory: ENVANTER
@@ -53,6 +52,7 @@ MonoBehaviour:
   fishing_caught_fish: '{0} ADET {1} YAKALADIN!'
   fishing_you_need_rod: "BALIK TUTMAK \u0130\xC7\u0130N OLTAYA \u0130HT\u0130YACIN
     VAR!"
+  fishing_rod_health_reduced: OLTANIN CANI AZALDI!
   shop_buy: SATIN AL
   shop_sell_equipment: "EK\u0130PMAN SAT"
   shop_sell_fish: BALIK SAT
@@ -62,6 +62,7 @@ MonoBehaviour:
   shop_preview_item: DENE
   shop_stop_preview: BIRAK
   shop_you_have_bought: "1 adet {0} sat\u0131n ald\u0131n!"
+  shop_cant_but_rod: "BUNU ALAMAZSIN \xC7\xDCNK\xDC ZATEN B\u0130R OLTAN VAR!"
   inventory_view_equipment: "EK\u0130PMANI G\xD6R"
   inventory_view_fish: "BALIKLARI G\xD6R"
   inventory_wear: "G\u0130Y"

@@ -16,7 +16,7 @@ public class SettingsUI : MonoBehaviour
     public void SetMusicVolume(float value)
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
-        SoundDatabase.Instance.SetVolume(value);
+        SoundDatabase.Instance.SetMusicVolume(value);
         GameData.musicVolume = value;
     }
 
@@ -34,12 +34,14 @@ public class SettingsUI : MonoBehaviour
             PlayerPrefs.SetFloat("MasterVolume", 1f);
             PlayerPrefs.SetFloat("MusicVolume", 1f);
         }
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality"));
-        GameData.masterVolume = PlayerPrefs.GetFloat("MasterVolume");
-        GameData.musicVolume = PlayerPrefs.GetFloat("MusicVolume");
 
-        qualitySetting.value = PlayerPrefs.GetInt("Quality");
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        SetVolumeLevel(PlayerPrefs.GetFloat("MasterVolume"));
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+
+        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality"));
+        qualitySetting.value = PlayerPrefs.GetInt("Quality");
     }
 }

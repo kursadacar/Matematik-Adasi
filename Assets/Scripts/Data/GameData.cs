@@ -202,10 +202,12 @@ public class GameData : Singleton<GameData>
 
         //set inventory -- by using item id and spawning corresponding item from ItemDatabase
         Player.Instance.data.inventory.Clear();
-        foreach(var itemID in Player.Instance.data._inventorySave)
+
+        for (int i = 0; i < Player.Instance.data._inventorySave.Count; i++)
         {
-            var item = Instantiate(ItemDatabase.items[itemID], Player.Instance.inventoryParent);
+            var item = Instantiate(ItemDatabase.items[Player.Instance.data._inventorySave[i].ID], Player.Instance.inventoryParent);
             item.Activate();
+            item.data = Player.Instance.data._inventorySave[i];
             Player.Inventory.Add(item);
         }
 
@@ -235,7 +237,7 @@ public class GameData : Singleton<GameData>
         Player.Instance.data._inventorySave.Clear();
         foreach(var item in Player.Instance.data.inventory)
         {
-            Player.Instance.data._inventorySave.Add(item.data.ID);
+            Player.Instance.data._inventorySave.Add(item.data);
         }
 
         //save equipment by saving the inventory id for each item

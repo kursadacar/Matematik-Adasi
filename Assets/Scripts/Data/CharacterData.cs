@@ -14,7 +14,8 @@ public class CharacterData
     public float[] position = new float[3];
 
     [JsonIgnore, NonSerialized] public List<Item> inventory = new List<Item>();
-    [SerializeField] public List<int> _inventorySave = new List<int>();
+    [SerializeField] public List<ItemData> _inventorySave = new List<ItemData>();
+
 
     [JsonIgnore, NonSerialized] public List<Item> equipment = new List<Item>();
     /// <summary>

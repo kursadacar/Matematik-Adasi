@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
+using UnityEngine.Rendering;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -45,6 +46,8 @@ public class GameManager : Singleton<GameManager>
 #else
         Application.targetFrameRate = 0;
 #endif
+        SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
+
         Time.timeScale = 0f;
         GameData.isPaused = true;
         GameData.isInMenu = true;
@@ -60,6 +63,7 @@ public class GameManager : Singleton<GameManager>
                     CameraController.Instance.mode = CameraController.CameraMode.Fishing;
                     UI_Manager.Instance.OpenMenu(GameData.FishingMenu);
                     Question.Instance.RegenerateRandomQuestion();
+                    Player.Instance.EquipRod();
                     GameData.isInMenu = true;
                 }
                 break;
@@ -79,6 +83,8 @@ public class GameManager : Singleton<GameManager>
                     GameData.MoneyText.text = Player.Instance.data.gold.ToString() + "₺";
                     GameData.isInMenu = false;
 
+                    Player.Instance.UnequipRod();
+
                     if (Player.Instance.isMoving)
                         Player.Instance.ResumeOnDestination();
                     GameData.SaveGame();
@@ -90,13 +96,15 @@ public class GameManager : Singleton<GameManager>
     private void ReduceRodDurability()
     {
         Player.Rod.data.durability--;
+        Notification.Instance.Display(GameData.ActiveLanguage.fishing_rod_health_reduced, 3f, Notification.NotificationType.BadNews);
         if (Player.Rod.data.durability == 0)
         {
+            Player.Instance.UnequipRod();
             var rod = Player.Rod;
             Player.Inventory.Remove(rod);
             Player.Equipment.Remove(rod);
             Destroy(rod.gameObject);
-            Notification.Instance.Display(GameData.ActiveLanguage.fishing_rod_broken, 5f, Notification.NotificationType.BadNews);
+            Notification.Instance.Display(GameData.ActiveLanguage.fishing_rod_broken, 3f, Notification.NotificationType.BadNews);
             ReturnToFreePlay();
         }
     }

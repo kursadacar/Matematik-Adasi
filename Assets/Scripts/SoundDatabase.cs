@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 public class SoundDatabase : Singleton<SoundDatabase>
 {
     [SerializeField] AudioSource audioSrc;
+    [SerializeField] AudioSource musicSource;
 
     public AudioClip mainMenuMusic;
     public List<AudioClip> backgroundMusic = new List<AudioClip>();
@@ -16,19 +17,19 @@ public class SoundDatabase : Singleton<SoundDatabase>
 
     private void Start()
     {
-        audioSrc.PlayOneShot(mainMenuMusic);
+        musicSource.PlayOneShot(mainMenuMusic);
     }
     private void Update()
     {
-        if (!audioSrc.isPlaying)
+        if (!musicSource.isPlaying)
         {
-            audioSrc.PlayOneShot(backgroundMusic[Random.Range(0, backgroundMusic.Count)]);
+            musicSource.PlayOneShot(backgroundMusic[Random.Range(0, backgroundMusic.Count)]);
         }
     }
 
-    public void SetVolume(float value)
+    public void SetMusicVolume(float value)
     {
-        audioSrc.volume = value;
+        musicSource.volume = value;
     }
 
     public void PlayAudio(AudioClip clip)

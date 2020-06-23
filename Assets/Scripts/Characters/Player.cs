@@ -195,12 +195,16 @@ public class Player : Character
 
     public void GoFishing()
     {
+        GameData.XMark.SetActive(false);
+
         StopMoving();
         SetDestination(GameData.FishingSpot.position, DestinationType.Fishing);
     }
 
     public void GoNearestShop()
     {
+        GameData.XMark.SetActive(false);
+
         float closestDist = Mathf.Infinity;
         Shop closestShop = null;
         foreach(var shop in FindObjectsOfType<Shop>())
@@ -382,6 +386,30 @@ public class Player : Character
 
 
         smCombiner.CombineMeshes();
+    }
+
+    public void EquipRod()
+    {
+        if (Rod == null)
+            return;
+
+        Rod.gameObject.layer = LayerMask.NameToLayer("Player");
+
+        var reassignWeights = Rod.rendererGameObject.GetComponent<ReassignBoneWeigthsToNewMesh>();
+        Rod.transform.position = transform.position;
+        Rod.rendererGameObject.transform.parent = transform;
+
+        reassignWeights.newArmature = Instance.armature;
+        reassignWeights.rootBoneName = "Spine1";
+        reassignWeights.Reassign();
+    }
+
+    public void UnequipRod()
+    {
+        if (Rod == null)
+            return;
+
+        Rod.rendererGameObject.transform.parent = Rod.transform;
     }
 
     public void UnwearItem(Item item)

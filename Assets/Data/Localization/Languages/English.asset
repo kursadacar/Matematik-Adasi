@@ -35,7 +35,6 @@ MonoBehaviour:
   settings_quality_level_2: MEDIUM
   settings_quality_level_3: HIGH
   settings_quality_level_4: ULTRA
-  in_game_menu_gold: VAULT
   in_game_menu_go_fishing: GO FISHING
   in_game_menu_closest_market: CLOSEST SHOP
   in_game_menu_inventory: INVENTORY
@@ -51,6 +50,7 @@ MonoBehaviour:
   fishing_wrong_answer: UNFORTUNAELTY <br> WRONG ANSWER!
   fishing_caught_fish: YOU HAVE CAUGHT {0} {1}!
   fishing_you_need_rod: YOU NEED A ROD BEFORE FISHING!
+  fishing_rod_health_reduced: YOUR ROD HAS LOST DURABILITY!
   shop_buy: BUY
   shop_sell_equipment: SELL EQUIPMENT
   shop_sell_fish: SELL FISH
@@ -60,6 +60,7 @@ MonoBehaviour:
   shop_preview_item: PREVIEW
   shop_stop_preview: STOP
   shop_you_have_bought: You have bought a {0}
+  shop_cant_but_rod: YOU CAN'T BUY THIS ITEM, BECAUSE YOU ALREADY HAVE A ROD!
   inventory_view_equipment: SHOW EQUIPMENT
   inventory_view_fish: SHOW FISHES
   inventory_wear: WEAR

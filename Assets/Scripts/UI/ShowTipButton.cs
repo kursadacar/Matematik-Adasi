@@ -11,7 +11,7 @@ public class ShowTipButton : MonoBehaviour
 
     private float cooldownLeft;
 
-    private void Start()
+    private void Awake()
     {
         available = true;
         tipCooldownBar.localScale = new Vector3(1f, 0f, 1f);

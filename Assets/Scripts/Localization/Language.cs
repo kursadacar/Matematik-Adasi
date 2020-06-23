@@ -5,8 +5,10 @@ public class Language : ScriptableObject
 {
     [Header("Language Prefix")]
     public string languagePrefix;
+
     [Header("Language Icon")]
     public Sprite languageIcon;
+
     [Header("Common")]
     public string yes;
     public string no;
@@ -56,6 +58,7 @@ public class Language : ScriptableObject
     public string fishing_wrong_answer;
     public string fishing_caught_fish;
     public string fishing_you_need_rod;
+    public string fishing_rod_health_reduced;
 
     [Header("Shop")]
     public string shop_buy;
@@ -67,6 +70,7 @@ public class Language : ScriptableObject
     public string shop_preview_item;
     public string shop_stop_preview;
     public string shop_you_have_bought;
+    public string shop_cant_but_rod;
 
     [Header("Inventory")]
     public string inventory_view_equipment;

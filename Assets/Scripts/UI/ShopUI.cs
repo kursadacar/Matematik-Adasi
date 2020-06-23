@@ -140,7 +140,11 @@ public class ShopUI : Singleton<ShopUI>
             Notification.Instance.Display(GameData.ActiveLanguage.shop_not_enough_money, 3f,Notification.NotificationType.BadNews);
             return;
         }
-
+        if(item.type == Item.ItemType.Rod && Player.Rod != null)
+        {
+            Notification.Instance.Display(GameData.ActiveLanguage.shop_cant_but_rod, 3f, Notification.NotificationType.Warning);
+            return;
+        }
         //StopPreview();
         Player.BuyItem(item);
     }
@@ -178,7 +182,7 @@ public class ShopUI : Singleton<ShopUI>
         {
             Player.Equipment.Remove(item);
         }
-        Player.Instance.PreviewUnwearItem(item);
+        Player.Instance.UnwearItem(item);
         Destroy(item.gameObject);
     }
 
@@ -189,6 +193,10 @@ public class ShopUI : Singleton<ShopUI>
 
     IEnumerator CheckForInput()
     {
+        Vector2 lastPos = Input.mousePosition;
+
+        float deltaX = 0f;
+
         while (true)
         {
             //Debug.Log("ShopUI-Check for input"); -- Optimized!
@@ -201,14 +209,19 @@ public class ShopUI : Singleton<ShopUI>
 
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    Player.Instance.transform.Rotate(0f, touch.deltaPosition.x * Time.deltaTime * 180f, 0f, Space.Self);
+                    Player.Instance.transform.Rotate(0f, -touch.deltaPosition.x / Screen.width * 360f, 0f, Space.Self);
                 }
-                yield return null;
+                goto EndMethod;
             }
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                Player.Instance.transform.Rotate(0f, -Input.GetAxis("Mouse X") * Time.deltaTime * 180f, 0f, Space.Self);
+                deltaX = ((Vector2)Input.mousePosition - lastPos).x;
+                Player.Instance.transform.Rotate(0f, -deltaX / Screen.width * 360f, 0f, Space.Self);
             }
+
+            lastPos = Input.mousePosition;
+
+            EndMethod: { }
             yield return null;
         }
     }
