@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
                     CameraController.Instance.mode = CameraController.CameraMode.FollowPlayer;
                     UI_Manager.Instance.OpenMenu(GameData.InGameUI);
 
-                    GameData.MoneyText.text = Player.Instance.data.gold.ToString() + "₺";
+                    GameData.MoneyText.text = Player.Instance.data.gold.ToString() + GameData.ActiveLanguage.currencySign;
                     GameData.isInMenu = false;
 
                     Player.Instance.UnequipRod();

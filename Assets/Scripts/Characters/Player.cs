@@ -346,7 +346,7 @@ public class Player : Character
     public static void AddGold(int amount)
     {
         Instance.data.gold += amount;
-        GameData.MoneyText.text = Instance.data.gold.ToString() + "₺";
+        GameData.MoneyText.text = Instance.data.gold.ToString() + GameData.ActiveLanguage.currencySign;
     }
 
     public void WearItem(Item item)

@@ -167,6 +167,7 @@ public class ShopUI : Singleton<ShopUI>
             Player.Instance.UnwearItem(item);
             Destroy(item.gameObject);
         }
+        SoundDatabase.PlayCoinSound();
     }
 
     public void SellItemAll(Item item)
@@ -201,7 +202,7 @@ public class ShopUI : Singleton<ShopUI>
         {
             //Debug.Log("ShopUI-Check for input"); -- Optimized!
             if (GameData.gameMode == GameData.Mode.Shopping)
-                shopMoneyText.text = Player.Gold.ToString() + "₺";
+                shopMoneyText.text = Player.Gold.ToString() + GameData.ActiveLanguage.currencySign;
 
             if (Input.touchCount > 0)
             {

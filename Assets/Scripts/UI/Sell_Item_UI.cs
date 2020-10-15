@@ -36,17 +36,15 @@ public class Sell_Item_UI : MonoBehaviour
     public void Activate(Item item)
     {
         targetItem = item;
-        amountText.text = targetItem.data.amount.ToString();
-        allValueText.text = "(" + (targetItem.data.value / 2 * item.data.amount).ToString() + "₺" + ")";
-        valueText.text = "(" + (targetItem.data.value / 2).ToString() + "₺" + ")";
+        RecalculateUI();
         icon.sprite = targetItem.icon;
         itemNameText.text = item.name;
     }
 
     void RecalculateUI()
     {
-        amountText.text = targetItem.data.amount.ToString();
-        allValueText.text = "(" + (targetItem.data.value / 2 * targetItem.data.amount).ToString() + "₺" + ")";
-        valueText.text = "(" + (targetItem.data.value / 2).ToString() + "₺" + ")";
+        amountText.text = "x" + targetItem.data.amount.ToString();
+        allValueText.text = GameData.ActiveLanguage.shop_sell_item_all;
+        valueText.text = (targetItem.data.value / 2).ToString() + GameData.ActiveLanguage.currencySign;
     }
 }

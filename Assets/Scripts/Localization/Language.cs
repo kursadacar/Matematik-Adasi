@@ -3,6 +3,9 @@
 [CreateAssetMenu(fileName = "Text Database", menuName = "MatOgretici/Text Database")]
 public class Language : ScriptableObject
 {
+    [Header("Currency")]
+    public string currencySign;
+
     [Header("Language Prefix")]
     public string languagePrefix;
 

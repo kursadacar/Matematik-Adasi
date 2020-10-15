@@ -39,7 +39,8 @@ public class Item : MonoBehaviour
         Hat,
         Shoe,
         Tshirt,
-        Pants
+        Pants,
+        Misc
     }
 
     public void Activate()

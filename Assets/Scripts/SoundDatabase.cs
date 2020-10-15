@@ -11,6 +11,7 @@ public class SoundDatabase : Singleton<SoundDatabase>
     public List<AudioClip> footsteps = new List<AudioClip>();
     public AudioClip fishSplashSound;
 
+    public AudioClip coinPurseSound;
     public AudioClip buttonSound;
     public AudioClip winSound;
     public AudioClip notificationSound;
@@ -55,6 +56,11 @@ public class SoundDatabase : Singleton<SoundDatabase>
     public static void PlayButtonSound()
     {
         Play(Instance.buttonSound);
+    }
+
+    public static void PlayCoinSound()
+    {
+        Play(Instance.coinPurseSound);
     }
 
     public static AudioClip GetRandomFootstep()

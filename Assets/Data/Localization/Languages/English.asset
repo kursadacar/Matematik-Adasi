@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a68db8868a8dd4a909a79d8d6fe0aa, type: 3}
   m_Name: English
   m_EditorClassIdentifier: 
+  currencySign: $
   languagePrefix: en
   languageIcon: {fileID: 21300000, guid: 36d364de221941d4284824e13d70b4b8, type: 3}
   yes: YES

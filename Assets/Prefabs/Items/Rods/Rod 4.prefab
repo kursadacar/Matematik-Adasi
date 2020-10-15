@@ -481,6 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a37d108af56d444907c3bc75d8cbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smRenderer: {fileID: 0}
+  rendererGameObject: {fileID: 0}
   data:
     ID: 21
     type: 2
@@ -932,7 +934,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newArmature: {fileID: 0}
   rootBoneName: Hips
-  PressToReassign: 0
 --- !u!1 &7231220161204800313
 GameObject:
   m_ObjectHideFlags: 0
